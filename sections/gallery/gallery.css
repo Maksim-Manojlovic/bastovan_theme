@@ -29,16 +29,6 @@
   pointer-events: none;
 }
 
-.gallery__scroll-wrap::before {
-  left: 0;
-  background: linear-gradient(to right, var(--color-bg), transparent);
-}
-
-.gallery__scroll-wrap::after {
-  right: 0;
-  background: linear-gradient(to left, var(--color-bg), transparent);
-}
-
 /* TRACK */
 .gallery__track {
   display: flex;
