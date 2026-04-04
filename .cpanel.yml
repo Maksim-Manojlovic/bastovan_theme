@@ -1,5 +1,4 @@
 deployment:
   tasks:
-    - export DOCROOT=/home/gradskib/public_html/wp-content/themes/bastovan-final
-    - mkdir -p $DOCROOT
-    - rsync -av --delete . $DOCROOT/
+    - export DOCROOT=/home/gradskib/public_html
+    - cp -r . $DOCROOT/wp-content/themes/bastovan-final/
