@@ -20,7 +20,7 @@ $telefon = bastovan_get_contact( 'telefon' );
        rel="home"
        aria-label="<?php bloginfo( 'name' ); ?> — početna">
 
-      <img src="http://localhost:10089/wp-content/uploads/2026/03/Gradski-bastovan-logo-02-scaled.webp"
+      <img src="https://gradskibastovan.rs/wp-content/uploads/2026/03/Gradski-bastovan-logo-02-scaled.webp"
            alt="<?php bloginfo( 'name' ); ?>"
            class="site-logo__img" />
 
