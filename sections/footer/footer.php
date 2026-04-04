@@ -59,7 +59,7 @@ $site_name = get_bloginfo( 'name' );
       </div>
 
       <!-- Usluge -->
-      <div>
+      <div class="footer__col-usluge">
         <span class="footer__col-title">Usluge</span>
         <?php
         $footer_usluge = new WP_Query( [
@@ -84,7 +84,7 @@ $site_name = get_bloginfo( 'name' );
       </div>
 
       <!-- Navigacija -->
-      <div>
+      <div class="footer__col-nav">
         <span class="footer__col-title">Navigacija</span>
         <?php wp_nav_menu( [
           'theme_location' => 'footer-menu',
@@ -96,7 +96,7 @@ $site_name = get_bloginfo( 'name' );
       </div>
 
       <!-- Kontakt -->
-      <div>
+      <div class="footer__kontakt">
         <span class="footer__col-title">Kontakt</span>
         <?php if ( $telefon ) : ?>
           <div class="footer__contact-item">
