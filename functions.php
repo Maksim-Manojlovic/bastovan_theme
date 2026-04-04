@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Theme constants
  */
 
-define( 'BASTOVAN_VERSION', '1.0.0' );
+define( 'BASTOVAN_VERSION', '1.1.0' );
 define( 'BASTOVAN_THEME_DIR', get_template_directory() );
 define( 'BASTOVAN_THEME_URI', get_template_directory_uri() );
 
