@@ -69,7 +69,7 @@ $sekundarne = get_posts( [
           $stavke   = $stavke ? json_decode( $stavke, true ) : [];
           $levo     = $index % 2 === 0;
         ?>
-        <div class="usluga-row <?php echo $levo ? 'usluga-row--levo' : 'usluga-row--desno'; ?>">
+        <div class="usluga-row <?php echo $levo ? 'usluga-row--levo' : 'usluga-row--desno'; ?>" id="<?php echo esc_attr( $usluga->post_name ); ?>">
 
           <div class="usluga-row__visual">
             <div class="usluga-row__placeholder">

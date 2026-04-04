@@ -65,15 +65,19 @@ $site_name = get_bloginfo( 'name' );
         $footer_usluge = new WP_Query( [
           'post_type'      => 'usluga',
           'posts_per_page' => 4,
-          'meta_key'       => '_bastovan_istaknuto',
-          'meta_value'     => '1',
           'orderby'        => 'menu_order',
           'order'          => 'ASC',
+          'tax_query'      => [ [
+            'taxonomy' => 'tip-usluge',
+            'field'    => 'slug',
+            'terms'    => 'primarne-usluge',
+          ] ],
         ] );
         if ( $footer_usluge->have_posts() ) : ?>
           <ul class="footer__links">
-            <?php while ( $footer_usluge->have_posts() ) : $footer_usluge->the_post(); ?>
-              <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+            <?php while ( $footer_usluge->have_posts() ) : $footer_usluge->the_post();
+              global $post; ?>
+              <li><a href="<?php echo esc_url( home_url( '/usluge/#' . $post->post_name ) ); ?>"><?php the_title(); ?></a></li>
             <?php endwhile; wp_reset_postdata(); ?>
           </ul>
         <?php endif; ?>
