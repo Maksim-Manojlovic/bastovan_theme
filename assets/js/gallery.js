@@ -12,12 +12,29 @@
   const btnNext = document.getElementById("gallery-next");
 
   if (track && btnPrev && btnNext) {
+    function getCardWidth() {
+      const card = track.querySelector(".gallery__card");
+      if (!card) return 480;
+      return card.offsetWidth + 20; // card width + gap
+    }
+
+    function updateBtns() {
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      btnPrev.disabled = track.scrollLeft <= 2;
+      btnNext.disabled = track.scrollLeft >= maxScroll - 2;
+      btnPrev.style.opacity = btnPrev.disabled ? "0.3" : "1";
+      btnNext.style.opacity = btnNext.disabled ? "0.3" : "1";
+    }
+
     btnNext.addEventListener("click", () => {
-      track.scrollBy({ left: 480, behavior: "smooth" });
+      track.scrollBy({ left: getCardWidth(), behavior: "smooth" });
     });
     btnPrev.addEventListener("click", () => {
-      track.scrollBy({ left: -480, behavior: "smooth" });
+      track.scrollBy({ left: -getCardWidth(), behavior: "smooth" });
     });
+
+    track.addEventListener("scroll", updateBtns, { passive: true });
+    updateBtns();
 
     // Disable touch swipe on track on mobile — arrows only
     track.addEventListener("touchstart", (e) => {
