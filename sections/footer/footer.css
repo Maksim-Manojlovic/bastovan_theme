@@ -285,12 +285,16 @@
     justify-content: center;
   }
   .footer__grid {
-    grid-template-columns: 1fr;
-    gap: 36px;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px 24px;
   }
   .footer__brand {
+    grid-column: 1 / -1;
     padding-bottom: 8px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .footer__grid > div:last-child {
+    grid-column: 1 / -1;
   }
   .footer__logo-icon {
     height: 52px;
