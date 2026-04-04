@@ -134,8 +134,8 @@
 }
 
 @media (max-width: 768px) {
-  .intro__badge {
-    bottom: -12px;
-    right: 0;
+  .intro__badge,
+  .intro__circle {
+    display: none;
   }
 }
