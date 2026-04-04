@@ -1,0 +1,4 @@
+deployment:
+  tasks:
+    - export DOCROOT=/home/gradskib/public_html
+    - cp -r * $DOCROOT/wp-content/themes/bastovan-final/
