@@ -42,7 +42,7 @@ $site_name = get_bloginfo( 'name' );
         </a>
         <p class="footer__desc">
           Profesionalno uređivanje i održavanje dvorišta na teritoriji Beograda.
-          Vaša bašta u sigurnim rukama.
+          Vaša bašta u sigurnim rukama. PROBA
         </p>
         <?php if ( $facebook || $instagram ) : ?>
           <div class="footer__social">
