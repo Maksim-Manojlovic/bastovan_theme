@@ -224,6 +224,11 @@
     grid-template-columns: 1fr;
   }
 
+  .usluga-row__icon,
+  .usluga-row__emoji {
+    display: none;
+  }
+
   .usluga-row--desno {
     direction: ltr;
   }
