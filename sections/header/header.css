@@ -155,8 +155,10 @@ body.admin-bar .site-header {
 
 /* MOBILE NAV */
 @media (max-width: 768px) {
-  .site-header__inner {
-    padding: 16px 36px !important;
+  .site-header__inner,
+  .site-header.is-scrolled .site-header__inner {
+    padding-left: 36px !important;
+    padding-right: 36px !important;
   }
 
   .site-header__toggle {

@@ -52,6 +52,11 @@
 }
 
 /* PRIMARNE HEADER */
+.usluge-primarne,
+.usluge-sekundarne {
+  overflow-x: hidden;
+}
+
 .usluge-primarne__header,
 .usluge-sekundarne__header {
   margin-bottom: var(--space-2xl);
