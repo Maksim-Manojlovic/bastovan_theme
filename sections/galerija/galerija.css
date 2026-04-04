@@ -167,8 +167,14 @@
   }
 
   .projekat__slika {
-    width: 300px;
+    width: 220px;
     height: 220px;
+  }
+
+  .projekat__slika img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 
