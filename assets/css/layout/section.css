@@ -1,0 +1,11 @@
+.section {
+  padding: var(--space-3xl) 5vw;
+}
+
+.section-sm {
+  padding: var(--space-2xl) 5vw;
+}
+
+.section-lg {
+  padding: 140px 5vw;
+}

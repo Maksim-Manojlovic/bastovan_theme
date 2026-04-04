@@ -1,0 +1,206 @@
+/* ===== SITE HEADER ===== */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid rgba(30, 61, 24, 0.08);
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+  transform: translateZ(0);
+}
+
+body.admin-bar .site-header {
+  top: 32px;
+}
+
+/* SCROLL STATE (glass efekt) */
+.site-header.is-scrolled {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(30, 61, 24, 0.06);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* INNER */
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  padding: 16px 0;
+  height: 96px;
+}
+
+/* SHRINK — bez height/padding tranzicije da nema treperenja */
+.site-header.is-scrolled .site-header__inner {
+  height: 72px;
+  padding: 10px 0;
+}
+
+/* LOGO */
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.site-logo img {
+  height: 72px;
+  width: auto;
+  display: block;
+  transition: height 0.3s ease;
+}
+
+.site-header.is-scrolled .site-logo img {
+  height: 56px;
+}
+
+/* TEXT */
+.site-logo__name {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1;
+}
+
+.site-logo__tagline {
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+}
+
+/* NAV */
+.site-nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.site-nav__list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav__list a {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text);
+  text-decoration: none;
+  padding: 4px 0;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.site-nav__list a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.site-nav__list a:hover,
+.site-nav__list .current-menu-item > a {
+  color: var(--color-primary);
+}
+
+.site-nav__list a:hover::after,
+.site-nav__list .current-menu-item > a::after {
+  transform: scaleX(1);
+}
+
+/* CTA */
+.site-header__cta {
+  flex-shrink: 0;
+}
+
+/* MOBILE TOGGLE */
+.site-header__toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-xs);
+}
+
+/* MOBILE NAV */
+@media (max-width: 768px) {
+  .site-header__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .site-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(30, 61, 24, 0.08);
+    padding: var(--space-md) 5vw;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .site-nav.is-open {
+    display: block;
+  }
+
+  .site-nav__list {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .site-nav__list li {
+    width: 100%;
+    border-bottom: 1px solid rgba(30, 61, 24, 0.06);
+  }
+
+  .site-nav__list a {
+    display: block;
+    padding: var(--space-md) 0;
+    font-size: var(--text-base);
+  }
+
+  .site-header__cta {
+    display: none;
+  }
+}
+
+
+
+
+/* BODY OFFSET — kompenzacija za fixed header */
+body {
+  padding-top: 96px;
+}
+
+body.admin-bar {
+  padding-top: 128px; /* 96px header + 32px admin bar */
+}
+
+@media (max-width: 782px) {
+  body.admin-bar {
+    padding-top: 126px; /* 80px header + 46px admin bar mobile */
+  }
+}
+

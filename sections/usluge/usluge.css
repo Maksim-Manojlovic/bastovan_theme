@@ -1,0 +1,324 @@
+/* ===== USLUGE STRANICA ===== */
+
+/* HERO */
+.usluge-hero {
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--color-primary-dark);
+}
+
+.usluge-hero__bg {
+  position: absolute;
+  inset: 0;
+}
+
+.usluge-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+.usluge-hero__inner {
+  position: relative;
+  z-index: 2;
+  padding: 120px 5vw 80px;
+}
+
+.usluge-hero__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 700;
+  color: var(--color-white);
+  line-height: 1.1;
+  margin-bottom: var(--space-md);
+  max-width: 700px;
+}
+
+.usluge-hero__title span {
+  color: var(--color-primary-light);
+  font-style: italic;
+}
+
+.usluge-hero__sub {
+  font-size: var(--text-lg);
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: var(--space-xl);
+  max-width: 500px;
+}
+
+/* PRIMARNE HEADER */
+.usluge-primarne__header,
+.usluge-sekundarne__header {
+  margin-bottom: var(--space-2xl);
+}
+
+/* LISTA — naizmenično */
+.usluge-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+.usluga-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xl);
+  align-items: center;
+}
+
+.usluga-row--desno {
+  direction: rtl;
+}
+
+.usluga-row--desno > * {
+  direction: ltr;
+}
+
+/* VISUAL PLACEHOLDER */
+.usluga-row__visual {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.usluga-row__placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-primary-light) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.usluga-row__placeholder::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 30% 40%,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 60%
+  );
+}
+
+.usluga-row__emoji {
+  font-size: 80px;
+  opacity: 0.4;
+  position: relative;
+  z-index: 1;
+}
+
+/* CONTENT */
+.usluga-row__icon {
+  font-size: 36px;
+  width: 64px;
+  height: 64px;
+  background: rgba(45, 90, 39, 0.08);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* META TAGS */
+.usluga-row__meta,
+.usluga-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.usluga-meta-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  background: rgba(45, 90, 39, 0.08);
+  border-radius: 999px;
+  font-size: var(--text-sm);
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+/* SEKUNDARNE — grid */
+.usluge-sekundarne {
+  background: var(--color-white);
+}
+
+.usluge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.usluga-card {
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl) var(--space-lg);
+  border: 1px solid rgba(30, 61, 24, 0.07);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+
+.usluga-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+.usluga-card__icon {
+  font-size: 32px;
+  margin-bottom: var(--space-md);
+}
+
+.usluga-card__naziv {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-sm);
+}
+
+.usluga-card__opis {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
+}
+
+.usluga-card__meta {
+  margin-top: auto;
+}
+
+/* PAKETI */
+.usluge-paketi {
+  background: var(--color-bg);
+  border-top: 1px solid rgba(30, 61, 24, 0.08);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .usluge-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .usluga-row {
+    grid-template-columns: 1fr;
+  }
+
+  .usluga-row--desno {
+    direction: ltr;
+  }
+
+  .usluge-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .usluge-hero__inner {
+    padding: 80px 5vw 60px;
+  }
+}
+
+/* ACCORDION */
+.usluga-accordion {
+  margin-top: var(--space-md);
+}
+
+.usluga-accordion__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: gap 0.2s;
+}
+
+.usluga-accordion__btn:hover {
+  gap: 12px;
+}
+
+.usluga-accordion__arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.usluga-accordion__btn[aria-expanded="true"] .usluga-accordion__arrow {
+  transform: rotate(180deg);
+}
+
+.usluga-accordion__panel {
+  margin-top: var(--space-md);
+  overflow: hidden;
+  animation: accordionOpen 0.3s ease;
+}
+
+@keyframes accordionOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* STAVKE TABELA */
+.usluga-stavke {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.usluga-stavke__row {
+  border-bottom: 1px solid rgba(30, 61, 24, 0.08);
+}
+
+.usluga-stavke__row:last-child {
+  border-bottom: none;
+}
+
+.usluga-stavke__naziv,
+.usluga-stavke__cena {
+  padding: 10px 0;
+  font-size: var(--text-sm);
+}
+
+.usluga-stavke__naziv {
+  color: var(--color-text);
+  font-weight: 500;
+  width: 50%;
+}
+
+.usluga-stavke__cena {
+  color: var(--color-muted);
+  text-align: right;
+}
+
+/* Manja varijanta za kartice */
+.usluga-accordion--sm .usluga-accordion__btn {
+  font-size: var(--text-xs);
+}
+
+.usluga-accordion--sm .usluga-stavke__naziv,
+.usluga-accordion--sm .usluga-stavke__cena {
+  font-size: var(--text-xs);
+  padding: 8px 0;
+}

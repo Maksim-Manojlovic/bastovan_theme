@@ -1,0 +1,407 @@
+/* ===== ADMIN META BOXES — Premium UI ===== */
+
+/* ===== ADMIN BRAND HEADER ===== */
+
+#usluga-detalji .postbox-header,
+#projekat-detalji .postbox-header {
+  background: linear-gradient(135deg, #2d5a27 0%, #4a8c42 100%);
+  border-radius: 8px 8px 0 0;
+}
+
+#usluga-detalji .postbox-header h2,
+#projekat-detalji .postbox-header h2 {
+  color: #fff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em;
+}
+
+#usluga-detalji .postbox-header .handle-actions .handlediv,
+#projekat-detalji .postbox-header .handle-actions .handlediv {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+#usluga-detalji .postbox-header .handle-actions .handlediv:hover,
+#projekat-detalji .postbox-header .handle-actions .handlediv:hover {
+  color: #fff !important;
+}
+
+/* Strelice u header */
+#usluga-detalji .postbox-header button,
+#projekat-detalji .postbox-header button {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+#usluga-detalji .postbox-header button:hover,
+#projekat-detalji .postbox-header button:hover {
+  color: #fff !important;
+}
+
+/* Zelena leva bordura na inside */
+#usluga-detalji .inside,
+#projekat-detalji .inside {
+  border-left: 3px solid #2d5a27;
+}
+
+/* Zeleni border oko celog meta boxa */
+#usluga-detalji,
+#projekat-detalji {
+  border: 2px solid #2d5a27 !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+/* Deblji zeleni border levo i dole */
+#usluga-detalji .inside,
+#projekat-detalji .inside {
+  border-left: 4px solid #2d5a27;
+  border-bottom: 3px solid #2d5a27;
+  border-radius: 0 0 6px 6px;
+}
+
+/* Wrapper pozadina */
+#usluga-detalji .inside,
+#projekat-detalji .inside {
+  background: #fafaf8;
+  border-radius: 0 0 8px 8px;
+  padding: 16px !important;
+}
+
+/* Form table */
+#usluga-detalji .form-table,
+#projekat-detalji .form-table {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #e8e4dc;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+#usluga-detalji .form-table tr,
+#projekat-detalji .form-table tr {
+  border-bottom: 1px solid #f0ede6;
+}
+
+#usluga-detalji .form-table tr:last-child,
+#projekat-detalji .form-table tr:last-child {
+  border-bottom: none;
+}
+
+#usluga-detalji .form-table th,
+#projekat-detalji .form-table th {
+  width: 160px;
+  padding: 14px 16px;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6b6b6b;
+  background: #fafaf8;
+  border-right: 1px solid #f0ede6;
+  vertical-align: middle;
+}
+
+#usluga-detalji .form-table td,
+#projekat-detalji .form-table td {
+  padding: 12px 16px;
+  vertical-align: middle;
+}
+
+/* Inputs */
+#usluga-detalji .form-table input:not([type="checkbox"]),
+#usluga-detalji .form-table select,
+#projekat-detalji .form-table input:not([type="checkbox"]),
+#projekat-detalji .form-table select {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-size: 13px;
+  background: #fff;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+  width: 100%;
+  max-width: 400px;
+}
+
+#usluga-detalji .form-table input:focus,
+#usluga-detalji .form-table select:focus,
+#projekat-detalji .form-table input:focus,
+#projekat-detalji .form-table select:focus {
+  border-color: #2d5a27;
+  box-shadow: 0 0 0 2px rgba(45, 90, 39, 0.12);
+  outline: none;
+}
+
+/* Emoji input posebno */
+#usluga-detalji .form-table input.small-text {
+  width: 70px;
+  font-size: 22px;
+  text-align: center;
+  padding: 4px 6px;
+  max-width: 70px;
+}
+
+/* Checkbox */
+#usluga-detalji input[type="checkbox"],
+#projekat-detalji input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #2d5a27;
+}
+
+/* Description */
+.form-table .description {
+  color: #999;
+  font-size: 11px;
+  margin-top: 5px;
+  display: block;
+}
+
+/* ===== STAVKE REPEATER ===== */
+
+#bastovan-stavke-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.bastovan-stavka {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid #e8e4dc;
+  border-radius: 8px;
+  padding: 8px 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.bastovan-stavka:hover {
+  border-color: #c8d4c4;
+  box-shadow: 0 2px 6px rgba(45, 90, 39, 0.08);
+}
+
+.bastovan-stavka span {
+  color: #bbb;
+  cursor: grab;
+  font-size: 16px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.bastovan-stavka span:hover {
+  color: #888;
+}
+
+.bastovan-stavka input.regular-text {
+  flex: 1;
+  border: 1px solid #e8e4dc;
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-size: 13px;
+  background: #fafaf8;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+  max-width: none !important;
+  width: auto !important;
+}
+
+.bastovan-stavka input.regular-text:focus {
+  border-color: #2d5a27;
+  background: #fff;
+  box-shadow: 0 0 0 2px rgba(45, 90, 39, 0.1);
+  outline: none;
+}
+
+.bastovan-stavka-remove {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #ccc !important;
+  padding: 0 !important;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50% !important;
+  transition:
+    color 0.2s,
+    background 0.2s !important;
+  min-height: auto !important;
+}
+
+.bastovan-stavka-remove:hover {
+  color: #d63638 !important;
+  background: #fce8e8 !important;
+}
+
+/* Dodaj stavku dugme */
+#bastovan-stavka-add {
+  background: transparent !important;
+  border: 1.5px dashed #2d5a27 !important;
+  color: #2d5a27 !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  padding: 7px 16px !important;
+  transition: all 0.2s !important;
+  min-height: auto !important;
+}
+
+#bastovan-stavka-add:hover {
+  background: #2d5a27 !important;
+  color: #fff !important;
+  border-style: solid !important;
+}
+
+/* ===== TIP USLUGE GRUPE ===== */
+
+.bastovan-tip-group {
+  background: #fff;
+  border: 1px solid #e8e4dc;
+  border-radius: 8px;
+  padding: 12px 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  margin-bottom: 8px;
+}
+
+.bastovan-tip-group label:first-child {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e1d1a;
+}
+
+.bastovan-usluge-select {
+  margin-top: 8px;
+}
+
+.bastovan-usluge-select select {
+  border-radius: 6px !important;
+  border: 1px solid #ddd !important;
+  padding: 7px 10px !important;
+  font-size: 13px !important;
+  background: #fafaf8 !important;
+  max-width: none !important;
+  width: 300px !important;
+}
+
+/* ===== GALERIJA ===== */
+
+#bastovan-galerija-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+  min-height: 10px;
+}
+
+#bastovan-galerija-preview img {
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border: 2px solid #fff;
+  outline: 1px solid #e8e4dc;
+}
+
+#bastovan-galerija-btn {
+  background: transparent !important;
+  border: 1.5px solid #2d5a27 !important;
+  color: #2d5a27 !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  transition: all 0.2s !important;
+}
+
+#bastovan-galerija-btn:hover {
+  background: #2d5a27 !important;
+  color: #fff !important;
+}
+
+/* ===== SECTIONS BUILDER ===== */
+
+#sections-list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#sections-list li {
+  background: #fff;
+  border: 1px solid #e8e4dc;
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  font-size: 13px;
+  font-weight: 500;
+  color: #1e1d1a;
+  transition: box-shadow 0.2s;
+}
+
+#sections-list li:hover {
+  box-shadow: 0 2px 8px rgba(45, 90, 39, 0.08);
+  border-color: #c8d4c4;
+}
+
+.handle {
+  cursor: grab;
+  color: #bbb;
+  font-size: 16px;
+  user-select: none;
+}
+
+.handle:hover {
+  color: #888;
+}
+
+.remove-section {
+  margin-left: auto;
+  background: transparent !important;
+  border: none !important;
+  color: #ccc !important;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0 !important;
+  line-height: 1;
+  transition: color 0.2s !important;
+  min-height: auto !important;
+}
+
+.remove-section:hover {
+  color: #d63638 !important;
+}
+
+#section-select {
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  padding: 7px 10px;
+  font-size: 13px;
+  min-width: 220px;
+}
+
+#add-section {
+  border-color: #2d5a27 !important;
+  color: #2d5a27 !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  transition: all 0.2s !important;
+}
+
+#add-section:hover {
+  background: #2d5a27 !important;
+  color: #fff !important;
+}

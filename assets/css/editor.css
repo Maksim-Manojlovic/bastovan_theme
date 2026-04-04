@@ -1,0 +1,31 @@
+/**
+ * editor.css — Stilovi za Gutenberg editor
+ * Ovo osigurava da editor izgleda kao frontend
+ */
+
+.editor-styles-wrapper {
+    font-family: 'Trebuchet MS', 'Helvetica Neue', sans-serif;
+    color: #1E1D1A;
+    background-color: #F8F6F1;
+}
+
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h4,
+.editor-styles-wrapper h5,
+.editor-styles-wrapper h6 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #1E1D1A;
+}
+
+.editor-styles-wrapper p {
+    color: #4A4740;
+    line-height: 1.6;
+}
+
+.editor-styles-wrapper a {
+    color: #2D5A27;
+}

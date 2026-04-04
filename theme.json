@@ -1,0 +1,53 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 2,
+  "settings": {
+    "appearanceTools": true,
+    "useRootPaddingAwareAlignments": true,
+
+    "color": {
+      "defaultColors": false,
+      "palette": [
+        { "name": "Primary", "slug": "primary", "color": "#2D5A27" },
+        { "name": "Accent", "slug": "accent", "color": "#F4A623" },
+        { "name": "White", "slug": "white", "color": "#FFFFFF" },
+        { "name": "Background", "slug": "bg", "color": "#F8F6F1" },
+        { "name": "Text", "slug": "text", "color": "#1E1D1A" }
+      ]
+    },
+
+    "typography": {
+      "fontFamilies": [
+        {
+          "name": "Heading",
+          "slug": "heading",
+          "fontFamily": "Georgia, serif"
+        },
+        {
+          "name": "Body",
+          "slug": "body",
+          "fontFamily": "'Trebuchet MS', sans-serif"
+        }
+      ],
+      "fontSizes": [
+        { "name": "Base", "slug": "base", "size": "1rem" },
+        { "name": "Large", "slug": "lg", "size": "1.25rem" },
+        { "name": "XL", "slug": "xl", "size": "1.5rem" },
+        { "name": "2XL", "slug": "2xl", "size": "2rem" }
+      ]
+    },
+
+    "spacing": {
+      "spacingSizes": [
+        { "name": "Small", "slug": "sm", "size": "0.5rem" },
+        { "name": "Medium", "slug": "md", "size": "1rem" },
+        { "name": "Large", "slug": "lg", "size": "2rem" }
+      ]
+    },
+
+    "layout": {
+      "contentSize": "1200px",
+      "wideSize": "1400px"
+    }
+  }
+}

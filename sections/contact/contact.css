@@ -1,0 +1,37 @@
+/* ===== CONTACT PAGE ===== */
+
+.contact {
+  background: var(--color-bg);
+}
+
+.contact__header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.contact__lead {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* FORM WRAP */
+.contact__form-wrap {
+  background: var(--color-white);
+  padding: 50px 60px;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+  max-width: 900px;
+  margin: 0 auto var(--space-2xl);
+}
+
+/* KALKULATOR */
+.contact__calc {
+  margin-top: var(--space-2xl);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .contact__form-wrap {
+    padding: 32px 24px;
+  }
+}

@@ -1,0 +1,41 @@
+:root {
+  /* COLORS */
+  --color-primary: #0c4734;
+  --color-primary-light: #cee07d;
+  --color-primary-dark: #0c4734;
+
+  --color-accent: #cee07d;
+
+  --color-bg: #fffaf3;
+  --color-white: #ffffff;
+  --color-text: #1e1d1a;
+  --color-muted: #6b6b6b;
+
+  /* TYPOGRAPHY */
+  --font-heading: "Cormorant Garamond", serif;
+  --font-body: "Outfit", sans-serif;
+
+  /* FONT SIZES */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 28px;
+  --text-3xl: 36px;
+  --text-4xl: 48px;
+
+  /* SPACING */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 100px;
+
+  /* BORDER */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
+}

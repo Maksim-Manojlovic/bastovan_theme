@@ -1,0 +1,114 @@
+/* ===== WPFORMS ===== */
+
+.wpforms-container {
+  font-family: inherit;
+  max-width: 720px;
+  margin: auto;
+}
+
+/* FIELD SPACING */
+.wpforms-container .wpforms-field {
+  margin-bottom: 18px;
+  position: relative;
+}
+
+/* LABEL */
+.wpforms-container label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* INPUT BASE */
+.wpforms-field input,
+.wpforms-field textarea,
+.wpforms-field select {
+  width: 100%;
+  padding: 16px 16px 16px 48px;
+  background: #fafafa;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+  font-family: inherit;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease; /* ne animiraj background */
+}
+
+/* FOCUS */
+.wpforms-field input:focus,
+.wpforms-field textarea:focus,
+.wpforms-field select:focus {
+  outline: none;
+  background: var(--color-white);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(45, 90, 39, 0.12);
+}
+
+/* TEXTAREA */
+.wpforms-field textarea {
+  min-height: 140px;
+  resize: vertical;
+  padding-top: 16px;
+}
+
+/* SUBMIT */
+.wpforms-container button[type="submit"],
+.wpforms-container input[type="submit"] {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  padding: 14px 32px;
+  border-radius: 999px;
+  font-size: var(--text-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.wpforms-container button[type="submit"]:hover,
+.wpforms-container input[type="submit"]:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+/* ERROR */
+.wpforms-error {
+  color: #c0392b;
+  font-size: var(--text-sm);
+  margin-top: 4px;
+}
+
+/* SUCCESS */
+.wpforms-confirmation-container {
+  background: #eaf7ea;
+  padding: 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid #cde5cd;
+}
+
+/* ICONS — inline SVG da bi sigurno radilo */
+.field-first input,
+.field-name input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='%232d5a27' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 16px center;
+}
+
+.field-last input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='%232d5a27' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 16px center;
+}
+
+.field-email input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='%232d5a27' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'/%3E%3Cpolyline points='22,6 12,13 2,6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 16px center;
+}
+
+.field-message textarea {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='%232d5a27' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 16px 18px;
+}
