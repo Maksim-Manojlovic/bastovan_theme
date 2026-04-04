@@ -137,7 +137,7 @@ body.admin-bar .site-header {
   border: none;
   cursor: pointer;
   padding: var(--space-xs);
-  color: var(--color-text);
+  color: var(--color-primary);
   line-height: 0;
 }
 
@@ -155,6 +155,10 @@ body.admin-bar .site-header {
 
 /* MOBILE NAV */
 @media (max-width: 768px) {
+  .site-header__inner {
+    padding: 16px 36px !important;
+  }
+
   .site-header__toggle {
     display: flex;
     align-items: center;
@@ -204,9 +208,6 @@ body.admin-bar .site-header {
   }
 }
 
-
-
-
 /* BODY OFFSET — kompenzacija za fixed header */
 body {
   padding-top: 96px;
@@ -221,4 +222,3 @@ body.admin-bar {
     padding-top: 126px; /* 80px header + 46px admin bar mobile */
   }
 }
-
