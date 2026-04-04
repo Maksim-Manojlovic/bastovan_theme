@@ -69,16 +69,30 @@
       isDragging = false;
     });
 
-    // ── TOUCH ──
-    split.addEventListener("touchstart", (e) => {
+    // ── TOUCH — only drag when touching the divider handle ──
+    let touchOnDivider = false;
+
+    divider.addEventListener("touchstart", (e) => {
+      touchOnDivider = true;
       startX   = e.touches[0].clientX;
       startPos = pos;
+      e.stopPropagation();
+    }, { passive: true });
+
+    split.addEventListener("touchstart", (e) => {
+      touchOnDivider = false;
     }, { passive: true });
 
     split.addEventListener("touchmove", (e) => {
+      if (!touchOnDivider) return;
       const rect  = split.getBoundingClientRect();
       const delta = ((e.touches[0].clientX - startX) / rect.width) * 100;
       setPos(startPos + delta);
+      e.stopPropagation();
+    }, { passive: true });
+
+    divider.addEventListener("touchend", () => {
+      touchOnDivider = false;
     }, { passive: true });
   });
 
