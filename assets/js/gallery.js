@@ -18,6 +18,19 @@
     btnPrev.addEventListener("click", () => {
       track.scrollBy({ left: -480, behavior: "smooth" });
     });
+
+    // Disable touch swipe on track on mobile — arrows only
+    track.addEventListener("touchstart", (e) => {
+      if (!e.target.closest(".gallery__split")) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    track.addEventListener("touchmove", (e) => {
+      if (!e.target.closest(".gallery__split")) {
+        e.preventDefault();
+      }
+    }, { passive: false });
   }
 
   // ─── GALLERY SPLIT REVEAL ────────────────────────────────
@@ -69,30 +82,25 @@
       isDragging = false;
     });
 
-    // ── TOUCH — only drag when touching the divider handle ──
-    let touchOnDivider = false;
-
-    divider.addEventListener("touchstart", (e) => {
-      touchOnDivider = true;
-      startX   = e.touches[0].clientX;
-      startPos = pos;
-      e.stopPropagation();
-    }, { passive: true });
+    // ── TOUCH ──
+    let isSplitDragging = false;
 
     split.addEventListener("touchstart", (e) => {
-      touchOnDivider = false;
+      isSplitDragging = true;
+      startX   = e.touches[0].clientX;
+      startPos = pos;
     }, { passive: true });
 
     split.addEventListener("touchmove", (e) => {
-      if (!touchOnDivider) return;
+      if (!isSplitDragging) return;
+      e.preventDefault(); // stop page/track scroll while dragging split
       const rect  = split.getBoundingClientRect();
       const delta = ((e.touches[0].clientX - startX) / rect.width) * 100;
       setPos(startPos + delta);
-      e.stopPropagation();
-    }, { passive: true });
+    }, { passive: false });
 
-    divider.addEventListener("touchend", () => {
-      touchOnDivider = false;
+    split.addEventListener("touchend", () => {
+      isSplitDragging = false;
     }, { passive: true });
   });
 

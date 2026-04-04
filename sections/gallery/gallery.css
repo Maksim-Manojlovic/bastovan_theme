@@ -233,4 +233,9 @@
   .gallery__layer--after img {
     width: 320px;
   }
+
+  /* Disable swipe scroll on mobile — buttons only */
+  .gallery__track {
+    touch-action: none;
+  }
 }
