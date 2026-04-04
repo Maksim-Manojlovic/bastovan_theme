@@ -229,6 +229,10 @@
     display: none;
   }
 
+  .usluga-row {
+    gap: var(--space-md);
+  }
+
   .usluga-row--desno {
     direction: ltr;
   }
