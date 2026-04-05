@@ -130,6 +130,46 @@ function bastovan_enqueue_assets() {
 
 
 /**
+ * CSS loading optimization — preload critical, defer non-critical
+ */
+add_filter( 'style_loader_tag', 'bastovan_optimize_css_loading', 10, 2 );
+
+function bastovan_optimize_css_loading( $tag, $handle ) {
+
+    // Critical CSS — preload hint so browser fetches them ASAP
+    $preload = [ 'bastovan-base', 'bastovan-header', 'section-hero' ];
+
+    // Non-critical CSS — defer so they don't block rendering
+    $defer = [
+        'section-services',
+        'section-intro',
+        'section-footer',
+        'section-gallery',
+        'section-calculator',
+        'section-contact',
+        'section-reviews',
+        'section-galerija',
+        'section-usluge',
+        'bastovan-style',
+    ];
+
+    if ( in_array( $handle, $preload, true ) ) {
+        preg_match( "/href='([^']+)'/", $tag, $m );
+        if ( ! empty( $m[1] ) ) {
+            return "<link rel='preload' as='style' href='{$m[1]}' />\n" . $tag;
+        }
+    }
+
+    if ( in_array( $handle, $defer, true ) ) {
+        $deferred = str_replace( " media='all'", " media='print' onload=\"this.media='all'\"", $tag );
+        return $deferred . "<noscript>{$tag}</noscript>\n";
+    }
+
+    return $tag;
+}
+
+
+/**
  * Editor styles
  */
 add_action( 'after_setup_theme', 'bastovan_editor_styles' );
