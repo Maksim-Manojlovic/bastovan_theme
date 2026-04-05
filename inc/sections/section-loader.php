@@ -16,7 +16,7 @@ function bastovan_section( $name, $args = [], $no_cache = false ) {
 
     if ( ! $no_cache ) {
 
-        $cache_key = 'bastovan_section_' . $name;
+        $cache_key = 'bastovan_section_' . $name . '_' . filemtime( $php );
 
         if ( ! empty( $args ) ) {
             $cache_key .= '_' . md5( json_encode( $args ) );

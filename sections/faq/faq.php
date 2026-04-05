@@ -1,6 +1,6 @@
 <?php
 /**
- * Section: FAQ
+ * Section: FAQ — 2 columns, v2
  * Reuse: get_template_part('sections/faq/faq')
  */
 

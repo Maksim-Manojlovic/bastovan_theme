@@ -88,6 +88,7 @@
         document.querySelectorAll(".faq__question--open").forEach(function (openBtn) {
           openBtn.classList.remove("faq__question--open");
           openBtn.setAttribute("aria-expanded", "false");
+          openBtn.closest(".faq__item")?.classList.remove("faq__item--open");
           const openAnswer = document.getElementById(openBtn.getAttribute("aria-controls"));
           if (openAnswer) openAnswer.classList.remove("faq__answer--open");
         });
@@ -96,6 +97,7 @@
         if (!isOpen && answer) {
           this.classList.add("faq__question--open");
           this.setAttribute("aria-expanded", "true");
+          this.closest(".faq__item")?.classList.add("faq__item--open");
           answer.classList.add("faq__answer--open");
         }
       });
