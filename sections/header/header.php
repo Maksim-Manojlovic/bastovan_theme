@@ -22,7 +22,8 @@ $telefon = bastovan_get_contact( 'telefon' );
 
       <img src="https://gradskibastovan.rs/wp-content/uploads/2026/03/Gradski-bastovan-logo-02-scaled.webp"
            alt="<?php bloginfo( 'name' ); ?>"
-           class="site-logo__img" />
+           class="site-logo__img"
+           loading="eager" />
 
     </a>
 
