@@ -110,6 +110,39 @@
     initFaqAccordion();
   }
 
+  // ─── ZONE ACCORDION ─────────────────────────────────────
+  function initZoneAccordion() {
+    document.querySelectorAll(".zone__trigger").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        const item   = this.closest(".zone__item");
+        const panel  = document.getElementById(this.getAttribute("aria-controls"));
+        const isOpen = item.classList.contains("zone__item--open");
+
+        // Close all
+        document.querySelectorAll(".zone__item--open").forEach(function (openItem) {
+          openItem.classList.remove("zone__item--open");
+          const openBtn   = openItem.querySelector(".zone__trigger");
+          const openPanel = openBtn ? document.getElementById(openBtn.getAttribute("aria-controls")) : null;
+          if (openBtn)   openBtn.setAttribute("aria-expanded", "false");
+          if (openPanel) openPanel.classList.remove("zone__panel--open");
+        });
+
+        // Open clicked (if it was closed)
+        if (!isOpen && panel) {
+          item.classList.add("zone__item--open");
+          this.setAttribute("aria-expanded", "true");
+          panel.classList.add("zone__panel--open");
+        }
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initZoneAccordion);
+  } else {
+    initZoneAccordion();
+  }
+
   // ─── HEADER SCROLL SHADOW ────────────────────────────────
   const siteHeader = document.getElementById("site-header");
   const headerEl   = document.querySelector(".site-header");
