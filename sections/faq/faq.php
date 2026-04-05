@@ -46,9 +46,12 @@ $pitanja = [
     'odgovor' => 'Možete nas kontaktirati telefonom ili putem sajta. Takođe, možete koristiti naš kalkulator cena i zatražiti besplatnu procenu.',
   ],
 ];
+
+$kolona1 = array_slice( $pitanja, 0, 5 );
+$kolona2 = array_slice( $pitanja, 5, 5 );
 ?>
 
-<section class="faq section" id="faq">
+<section class="faq section" id="faq" itemscope itemtype="https://schema.org/FAQPage">
   <div class="container">
 
     <div class="faq__header stack-sm">
@@ -57,31 +60,37 @@ $pitanja = [
       <p class="text-lead">Odgovori na najčešća pitanja naših klijenata u Beogradu.</p>
     </div>
 
-    <div class="faq__list" itemscope itemtype="https://schema.org/FAQPage">
+    <div class="faq__grid">
 
-      <?php foreach ( $pitanja as $i => $item ) : ?>
-      <div class="faq__item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <?php foreach ( [ $kolona1, $kolona2 ] as $kolona_idx => $kolona ) : ?>
+      <div class="faq__col">
+        <?php foreach ( $kolona as $j => $item ) :
+          $i = $kolona_idx * 5 + $j;
+        ?>
+        <div class="faq__item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
 
-        <button
-          class="faq__question<?php echo $i === 0 ? ' faq__question--open' : ''; ?>"
-          aria-expanded="<?php echo $i === 0 ? 'true' : 'false'; ?>"
-          aria-controls="faq-answer-<?php echo $i; ?>"
-          itemprop="name"
-        >
-          <span><?php echo esc_html( $item['pitanje'] ); ?></span>
-          <span class="faq__icon" aria-hidden="true"></span>
-        </button>
+          <button
+            class="faq__question"
+            aria-expanded="false"
+            aria-controls="faq-answer-<?php echo $i; ?>"
+            itemprop="name"
+          >
+            <span><?php echo esc_html( $item['pitanje'] ); ?></span>
+            <span class="faq__icon" aria-hidden="true"></span>
+          </button>
 
-        <div
-          class="faq__answer<?php echo $i === 0 ? ' faq__answer--open' : ''; ?>"
-          id="faq-answer-<?php echo $i; ?>"
-          itemscope
-          itemprop="acceptedAnswer"
-          itemtype="https://schema.org/Answer"
-        >
-          <p itemprop="text"><?php echo esc_html( $item['odgovor'] ); ?></p>
+          <div
+            class="faq__answer"
+            id="faq-answer-<?php echo $i; ?>"
+            itemscope
+            itemprop="acceptedAnswer"
+            itemtype="https://schema.org/Answer"
+          >
+            <p itemprop="text"><?php echo esc_html( $item['odgovor'] ); ?></p>
+          </div>
+
         </div>
-
+        <?php endforeach; ?>
       </div>
       <?php endforeach; ?>
 

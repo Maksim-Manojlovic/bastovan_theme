@@ -78,27 +78,35 @@
   });
 
   // ─── FAQ ACCORDION ──────────────────────────────────────
-  document.querySelectorAll(".faq__question").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      const isOpen = this.classList.contains("faq__question--open");
-      const answer = document.getElementById(this.getAttribute("aria-controls"));
+  function initFaqAccordion() {
+    document.querySelectorAll(".faq__question").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        const isOpen = this.classList.contains("faq__question--open");
+        const answer = document.getElementById(this.getAttribute("aria-controls"));
 
-      // Close all
-      document.querySelectorAll(".faq__question--open").forEach(function (openBtn) {
-        openBtn.classList.remove("faq__question--open");
-        openBtn.setAttribute("aria-expanded", "false");
-        const openAnswer = document.getElementById(openBtn.getAttribute("aria-controls"));
-        if (openAnswer) openAnswer.classList.remove("faq__answer--open");
+        // Close all
+        document.querySelectorAll(".faq__question--open").forEach(function (openBtn) {
+          openBtn.classList.remove("faq__question--open");
+          openBtn.setAttribute("aria-expanded", "false");
+          const openAnswer = document.getElementById(openBtn.getAttribute("aria-controls"));
+          if (openAnswer) openAnswer.classList.remove("faq__answer--open");
+        });
+
+        // Open clicked (if it wasn't already open)
+        if (!isOpen && answer) {
+          this.classList.add("faq__question--open");
+          this.setAttribute("aria-expanded", "true");
+          answer.classList.add("faq__answer--open");
+        }
       });
-
-      // Open clicked (if it wasn't already open)
-      if (!isOpen && answer) {
-        this.classList.add("faq__question--open");
-        this.setAttribute("aria-expanded", "true");
-        answer.classList.add("faq__answer--open");
-      }
     });
-  });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initFaqAccordion);
+  } else {
+    initFaqAccordion();
+  }
 
   // ─── HEADER SCROLL SHADOW ────────────────────────────────
   const siteHeader = document.getElementById("site-header");

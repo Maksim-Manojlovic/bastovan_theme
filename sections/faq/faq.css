@@ -6,15 +6,21 @@
 
 .faq__header {
   margin-bottom: var(--space-xl);
+  text-align: center;
 }
 
-/* LIST */
-.faq__list {
-  max-width: 800px;
-  margin: 0 auto;
+/* 2-COLUMN GRID */
+.faq__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 var(--space-2xl);
+  align-items: start;
+}
+
+/* COLUMN */
+.faq__col {
   display: flex;
   flex-direction: column;
-  gap: 0;
 }
 
 /* ITEM */
@@ -135,8 +141,17 @@
   margin: 0;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE — stack to single column on mobile */
 @media (max-width: 768px) {
+  .faq__grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .faq__col:nth-child(2) .faq__item:first-child {
+    border-top: none;
+  }
+
   .faq__question {
     font-size: var(--text-lg);
     padding: var(--space-md) 0;
