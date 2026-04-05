@@ -19,22 +19,8 @@ function bastovan_enqueue_assets() {
     );
 
     /**
-     * 2. COMPONENTS
+     * 2. HEADER
      */
-    wp_enqueue_style(
-        'bastovan-buttons',
-        BASTOVAN_THEME_URI . '/assets/css/components/buttons.css',
-        [ 'bastovan-base' ],
-        BASTOVAN_VERSION
-    );
-
-    wp_enqueue_style(
-        'bastovan-wpforms',
-        BASTOVAN_THEME_URI . '/assets/css/components/wpforms.css',
-        [ 'bastovan-base' ],
-        BASTOVAN_VERSION
-    );
-
     wp_enqueue_style(
         'bastovan-header',
         BASTOVAN_THEME_URI . '/sections/header/header.css',
