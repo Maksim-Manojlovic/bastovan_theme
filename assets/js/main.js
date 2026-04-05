@@ -77,6 +77,29 @@
     });
   });
 
+  // ─── FAQ ACCORDION ──────────────────────────────────────
+  document.querySelectorAll(".faq__question").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      const isOpen = this.classList.contains("faq__question--open");
+      const answer = document.getElementById(this.getAttribute("aria-controls"));
+
+      // Close all
+      document.querySelectorAll(".faq__question--open").forEach(function (openBtn) {
+        openBtn.classList.remove("faq__question--open");
+        openBtn.setAttribute("aria-expanded", "false");
+        const openAnswer = document.getElementById(openBtn.getAttribute("aria-controls"));
+        if (openAnswer) openAnswer.classList.remove("faq__answer--open");
+      });
+
+      // Open clicked (if it wasn't already open)
+      if (!isOpen && answer) {
+        this.classList.add("faq__question--open");
+        this.setAttribute("aria-expanded", "true");
+        answer.classList.add("faq__answer--open");
+      }
+    });
+  });
+
   // ─── HEADER SCROLL SHADOW ────────────────────────────────
   const siteHeader = document.getElementById("site-header");
   const headerEl   = document.querySelector(".site-header");

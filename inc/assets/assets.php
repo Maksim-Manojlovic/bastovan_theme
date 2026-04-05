@@ -41,6 +41,7 @@ function bastovan_enqueue_assets() {
         'contact',
         'galerija',
         'usluge',
+        'faq',
         'footer',
     ];
 
@@ -150,6 +151,7 @@ function bastovan_optimize_css_loading( $tag, $handle ) {
         'section-reviews',
         'section-galerija',
         'section-usluge',
+        'section-faq',
         'bastovan-style',
     ];
 
