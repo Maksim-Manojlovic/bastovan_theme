@@ -36,7 +36,7 @@ $site_name = get_bloginfo( 'name' );
       <!-- Brend -->
       <div class="footer__brand">
         <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer__logo">
-          <img src="https://gradskibastovan.rs/wp-content/uploads/2026/03/Gradski-bastovan-logo-01-scaled.webp"
+          <img src="https://gradskibastovan.rs/wp-content/uploads/2026/03/Gradski-bastovan-logo-01-2.webp"
                alt="Gradski Baštovan" class="footer__logo-icon"
                loading="lazy">
           <span class="footer__logo-text"><?php echo esc_html( $site_name ); ?></span>
