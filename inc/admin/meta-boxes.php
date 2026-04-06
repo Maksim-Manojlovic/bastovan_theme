@@ -26,6 +26,7 @@ function bastovan_usluga_meta_box_html( $post ) {
     wp_nonce_field( 'bastovan_save_usluga_meta', 'bastovan_usluga_nonce' );
 
     $ikonica   = get_post_meta( $post->ID, '_bastovan_ikonica', true );
+    $slika     = get_post_meta( $post->ID, '_bastovan_slika', true );
     $cena_od   = get_post_meta( $post->ID, '_bastovan_cena_od', true );
     $cena_do   = get_post_meta( $post->ID, '_bastovan_cena_do', true );
     $trajanje  = get_post_meta( $post->ID, '_bastovan_trajanje', true );
@@ -44,6 +45,40 @@ function bastovan_usluga_meta_box_html( $post ) {
                        value="<?php echo esc_attr( $ikonica ); ?>"
                        placeholder="npr. 🌿" class="small-text">
                 <p class="description">Unesite emoji koji predstavlja uslugu.</p>
+            </td>
+        </tr>
+
+        <!-- SLIKA USLUGE -->
+        <tr>
+            <th><label>Slika usluge</label></th>
+            <td>
+                <div class="bastovan-single-image-wrap">
+                    <?php if ( $slika ) :
+                        $slika_url = wp_get_attachment_image_url( $slika, 'medium' );
+                        if ( $slika_url ) : ?>
+                            <div class="bastovan-image-preview" id="bastovan-slika-preview">
+                                <img src="<?php echo esc_url( $slika_url ); ?>"
+                                     style="max-width:200px;border-radius:8px;display:block;margin-bottom:8px;">
+                                <button type="button" class="button bastovan-image-remove"
+                                        data-target="bastovan_slika"
+                                        data-preview="bastovan-slika-preview">
+                                    ✕ Ukloni
+                                </button>
+                            </div>
+                        <?php endif;
+                    else : ?>
+                        <div id="bastovan-slika-preview"></div>
+                    <?php endif; ?>
+                    <input type="hidden" id="bastovan_slika" name="bastovan_slika"
+                           value="<?php echo esc_attr( $slika ); ?>">
+                    <button type="button" class="button bastovan-image-upload"
+                            data-target="bastovan_slika"
+                            data-preview="bastovan-slika-preview"
+                            style="margin-top:6px;">
+                        📷 Izaberi sliku usluge
+                    </button>
+                </div>
+                <p class="description">Prikazuje se u sekciji primarne usluge umesto zelenog gradijenta.</p>
             </td>
         </tr>
 
@@ -145,6 +180,7 @@ function bastovan_save_usluga_meta( $post_id ) {
 
     $fields = [
         '_bastovan_ikonica'   => 'bastovan_ikonica',
+        '_bastovan_slika'     => 'bastovan_slika',
         '_bastovan_cena_od'   => 'bastovan_cena_od',
         '_bastovan_cena_do'   => 'bastovan_cena_do',
         '_bastovan_trajanje'  => 'bastovan_trajanje',

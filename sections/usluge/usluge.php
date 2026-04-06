@@ -60,21 +60,33 @@ $sekundarne = get_posts( [
 
       <div class="usluge-lista">
         <?php foreach ( $primarne as $index => $usluga ) :
-          $ikonica  = get_post_meta( $usluga->ID, '_bastovan_ikonica', true ) ?: '🌿';
-          $opis     = get_post_meta( $usluga->ID, '_bastovan_opis', true );
-          $cena_od  = get_post_meta( $usluga->ID, '_bastovan_cena_od', true );
-          $cena_do  = get_post_meta( $usluga->ID, '_bastovan_cena_do', true );
-          $trajanje = get_post_meta( $usluga->ID, '_bastovan_trajanje', true );
-          $stavke   = get_post_meta( $usluga->ID, '_bastovan_stavke', true );
-          $stavke   = $stavke ? json_decode( $stavke, true ) : [];
-          $levo     = $index % 2 === 0;
+          $ikonica   = get_post_meta( $usluga->ID, '_bastovan_ikonica', true ) ?: '🌿';
+          $slika_id  = get_post_meta( $usluga->ID, '_bastovan_slika', true );
+          $slika_url = $slika_id ? wp_get_attachment_image_url( $slika_id, 'large' ) : '';
+          $opis      = get_post_meta( $usluga->ID, '_bastovan_opis', true );
+          $cena_od   = get_post_meta( $usluga->ID, '_bastovan_cena_od', true );
+          $cena_do   = get_post_meta( $usluga->ID, '_bastovan_cena_do', true );
+          $trajanje  = get_post_meta( $usluga->ID, '_bastovan_trajanje', true );
+          $stavke    = get_post_meta( $usluga->ID, '_bastovan_stavke', true );
+          $stavke    = $stavke ? json_decode( $stavke, true ) : [];
+          $levo      = $index % 2 === 0;
         ?>
         <div class="usluga-row <?php echo $levo ? 'usluga-row--levo' : 'usluga-row--desno'; ?>" id="<?php echo esc_attr( $usluga->post_name ); ?>">
 
           <div class="usluga-row__visual">
-            <div class="usluga-row__placeholder">
-              <span class="usluga-row__emoji"><?php echo esc_html( $ikonica ); ?></span>
-            </div>
+            <?php if ( $slika_url ) : ?>
+              <img
+                src="<?php echo esc_url( $slika_url ); ?>"
+                alt="<?php echo esc_attr( $usluga->post_title ); ?> — uređivanje dvorišta Beograd"
+                loading="lazy"
+                decoding="async"
+                class="usluga-row__slika"
+              >
+            <?php else : ?>
+              <div class="usluga-row__placeholder">
+                <span class="usluga-row__emoji"><?php echo esc_html( $ikonica ); ?></span>
+              </div>
+            <?php endif; ?>
           </div>
 
           <div class="usluga-row__content stack-md">
