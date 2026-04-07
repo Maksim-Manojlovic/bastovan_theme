@@ -19,7 +19,17 @@ function bastovan_enqueue_assets() {
     );
 
     /**
-     * 2. HEADER
+     * 2. GOOGLE FONTS (deferred — non-blocking)
+     */
+    wp_enqueue_style(
+        'bastovan-fonts',
+        'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap',
+        [],
+        null
+    );
+
+    /**
+     * 3. HEADER
      */
     wp_enqueue_style(
         'bastovan-header',
@@ -29,7 +39,7 @@ function bastovan_enqueue_assets() {
     );
 
     /**
-     * 3. SECTIONS
+     * 4. SECTIONS
      */
     $sections = [
         'hero',
@@ -59,7 +69,7 @@ function bastovan_enqueue_assets() {
     }
 
     /**
-     * 4. GLOBAL style.css
+     * 5. GLOBAL style.css
      */
     wp_enqueue_style(
         'bastovan-style',
@@ -143,6 +153,7 @@ function bastovan_optimize_css_loading( $tag, $handle ) {
 
     // Non-critical CSS — defer so they don't block rendering
     $defer = [
+        'bastovan-fonts',
         'section-services',
         'section-intro',
         'section-footer',
