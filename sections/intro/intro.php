@@ -8,7 +8,9 @@ $args = $args ?? [];
 
 $theme_uri = get_template_directory_uri();
 
-$img = $args['img'] ?? wp_get_attachment_image_url(216, 'full');$years = $args['years'] ?? '10+';
+$img_id = 216; // ID slike u Media Library
+$img_url = $args['img'] ?? wp_get_attachment_image_url($img_id, 'full');
+$years = $args['years'] ?? '10+';
 $title = $args['title'] ?? 'Vaš pouzdan partner<br>za savršeno dvorište';
 
 $tel = bastovan_get_contact( 'telefon' ) ?: '+381110000000';
@@ -23,10 +25,12 @@ $tel = bastovan_get_contact( 'telefon' ) ?: '+381110000000';
 
       <div class="intro__img-wrap">
         <img
-          src="<?php echo esc_url( $img ); ?>"
-          alt="Naš tim na terenu"
-          loading="lazy"
-          decoding="async"
+          src="<?php echo esc_url($img_url); ?>"
+    srcset="<?php echo esc_attr( wp_get_attachment_image_srcset($img_id) ); ?>"
+    sizes="(max-width: 768px) 100vw, 50vw"
+    alt="Naš tim na terenu"
+    loading="lazy"
+    decoding="async"
         >
       </div>
 
