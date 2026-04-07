@@ -23,7 +23,7 @@ function bastovan_enqueue_assets() {
      */
     wp_enqueue_style(
         'bastovan-fonts',
-        'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap',
+        'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap',
         [],
         null
     );
