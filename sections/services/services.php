@@ -3,7 +3,7 @@
  * Services Section
  * Reuse: get_template_part('sections/services/services')
  */
-
+$img = wp_get_attachment_image_url(221, 'full');
 $theme_uri = get_template_directory_uri();
 ?>
 
@@ -31,7 +31,7 @@ $theme_uri = get_template_directory_uri();
         </div>
         <div class="services__img">
           <img
-            src="<?php echo esc_url( $theme_uri ); ?>/assets/images/planiranje.jpg"
+           src="<?php echo esc_url($img); ?>"
             alt="Planiranje dvorišta"
             loading="lazy"
           >
