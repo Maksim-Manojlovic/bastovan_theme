@@ -13,7 +13,7 @@ $title    = $args['title']    ?? 'Profesionalno uređivanje <br><span>i održava
 $subtitle = $args['subtitle'] ?? 'Brza, pouzdana i pristupačna usluga za vaše savršeno dvorište. Prepustite košenje, orezivanje i čišćenje nama.';
 $cta_url  = $args['cta_url']  ?? '#kalkulator';
 $cta_text = $args['cta_text'] ?? '🌿 Zatražite besplatnu procenu';
-$img      = $args['img']      ?? $theme_uri . '/assets/images/hero-dvoriste.jpg';
+// $img      = $args['img']      ?? $theme_uri . '/assets/images/hero-dvoriste.jpg';
 
 $tel = bastovan_get_contact( 'telefon' ) ?: '+381110000000';
 ?>
@@ -21,13 +21,13 @@ $tel = bastovan_get_contact( 'telefon' ) ?: '+381110000000';
 <section class="hero" id="pocetna">
 
   <div class="hero__bg" aria-hidden="true">
-    <img
+    <!-- <img
       src="<?php echo esc_url( $img ); ?>"
       alt="Uređeno dvorište — Bastovanstvo Beograd"
       loading="eager"
       fetchpriority="high"
       decoding="async"
-    >
+    > -->
   </div>
 
   <div class="hero__grain" aria-hidden="true"></div>
