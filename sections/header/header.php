@@ -20,10 +20,15 @@ $telefon = bastovan_get_contact( 'telefon' );
        rel="home"
        aria-label="<?php bloginfo( 'name' ); ?> — početna">
 
-      <img src="https://gradskibastovan.rs/wp-content/uploads/2026/03/Gradski-bastovan-logo-02-2.webp"
-           alt="<?php bloginfo( 'name' ); ?>"
-           class="site-logo__img"
-           loading="eager" />
+      <?php
+      $logo_attrs = [
+        'class'         => 'site-logo__img',
+        'loading'       => 'eager',
+        'fetchpriority' => 'high',
+        'decoding'      => 'async',
+      ];
+      echo wp_get_attachment_image( 209, [ 400, 144 ], false, $logo_attrs );
+      ?>
 
     </a>
 
