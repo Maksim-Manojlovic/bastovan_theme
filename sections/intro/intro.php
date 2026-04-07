@@ -8,8 +8,7 @@ $args = $args ?? [];
 
 $theme_uri = get_template_directory_uri();
 
-$img   = $args['img']   ?? $theme_uri . '/assets/images/tim-na-terenu.jpg';
-$years = $args['years'] ?? '10+';
+$img = $args['img'] ?? wp_get_attachment_image_url(216, 'full');$years = $args['years'] ?? '10+';
 $title = $args['title'] ?? 'Vaš pouzdan partner<br>za savršeno dvorište';
 
 $tel = bastovan_get_contact( 'telefon' ) ?: '+381110000000';
