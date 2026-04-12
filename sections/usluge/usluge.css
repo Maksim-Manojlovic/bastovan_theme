@@ -185,6 +185,8 @@
   transition:
     transform 0.3s,
     box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
 }
 
 .usluga-card:hover {
@@ -345,4 +347,49 @@
 .usluga-accordion--sm .usluga-stavke__cena {
   font-size: var(--text-xs);
   padding: 8px 0;
+}
+
+/* CALL BUTTON */
+.usluga-card__footer {
+  margin-top: auto;
+  padding-top: var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.usluga-card__call-label {
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  line-height: 1.4;
+}
+
+.usluga-card__call {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--color-primary);
+  border-radius: var(--radius-sm);
+  color: var(--color-white);
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  flex-shrink: 0;
+}
+
+.usluga-card__call svg {
+  fill: currentColor;
+  width: 20px;
+  height: 20px;
+}
+
+.usluga-card__call:hover {
+  background: var(--color-primary-dark);
+  transform: scale(1.06);
+}
+
+.usluga-card__call:active {
+  transform: scale(0.97);
 }

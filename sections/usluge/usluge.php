@@ -158,6 +158,7 @@ $sekundarne = get_posts( [
         <h2 class="heading-lg">Sve što vaše dvorište još može da dobije</h2>
       </div>
 
+      <?php $telefon = bastovan_get_contact( 'telefon' ); ?>
       <div class="usluge-grid">
         <?php foreach ( $sekundarne as $usluga ) :
           $ikonica  = get_post_meta( $usluga->ID, '_bastovan_ikonica', true ) ?: '✨';
@@ -205,6 +206,17 @@ $sekundarne = get_posts( [
                 <?php endforeach; ?>
               </table>
             </div>
+          </div>
+          <?php endif; ?>
+
+          <?php if ( $telefon ) : ?>
+          <div class="usluga-card__footer">
+            <span class="usluga-card__call-label">Pozovite nas za više informacija</span>
+            <a
+              href="tel:<?php echo esc_attr( $telefon ); ?>"
+              class="usluga-card__call"
+              aria-label="Pozovite nas za uslugu <?php echo esc_attr( $usluga->post_title ); ?>"
+            ><?php echo bastovan_icon( 'phone' ); ?></a>
           </div>
           <?php endif; ?>
 
