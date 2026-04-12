@@ -113,7 +113,7 @@ $sekundarne = get_posts( [
             </div>
             <?php endif; ?>
 
-            <a href="/#kalkulator" class="btn btn--green">Izračunaj cenu →</a>
+            <a href="#kalkulator" class="btn btn--green">Izračunaj cenu →</a>
 
             <?php if ( ! empty( $stavke ) ) : ?>
             <div class="usluga-accordion">
