@@ -183,7 +183,8 @@ $projekti_query = new WP_Query( [
                     <?php if ( $slika_pre_url ) : ?>
                       <img src="<?php echo esc_url( $slika_pre_url ); ?>"
                            alt="Pre — <?php echo esc_attr( get_the_title() ); ?>"
-                           loading="lazy">
+                           loading="eager"
+                           decoding="async">
                     <?php endif; ?>
                     <span class="gallery__label gallery__label--before">Pre</span>
                   </div>
@@ -191,7 +192,8 @@ $projekti_query = new WP_Query( [
                     <?php if ( $slika_posle_url ) : ?>
                       <img src="<?php echo esc_url( $slika_posle_url ); ?>"
                            alt="Posle — <?php echo esc_attr( get_the_title() ); ?>"
-                           loading="lazy">
+                           loading="eager"
+                           decoding="async">
                     <?php endif; ?>
                     <span class="gallery__label gallery__label--after">Posle</span>
                   </div>
