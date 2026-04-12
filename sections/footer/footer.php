@@ -130,8 +130,7 @@ $site_name = get_bloginfo( 'name' );
           <div>
             <span class="footer__contact-label">Radno vreme</span>
             <span class="footer__contact-val">Pon–Sub: 07:00–20:00<br>Ned: Po dogovoru</span><br>
-            <span class="footer__contact-val">Broj telefona: </span><br>
-            <span class="footer__contact-val">Email adresa:</span>
+           
           </div>
         </div>
         <?php if ( $adresa ) : ?>
