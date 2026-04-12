@@ -257,12 +257,33 @@ $projekti_query = new WP_Query( [
 <div class="pd-modal" id="pd-modal" hidden aria-modal="true" role="dialog" aria-label="Detalj projekta">
   <div class="pd-modal__backdrop"></div>
   <div class="pd-modal__dialog">
-    <button class="pd-modal__close" aria-label="Zatvori">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <line x1="1" y1="1" x2="15" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        <line x1="15" y1="1" x2="1" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-    </button>
+
+    <div class="pd-modal__header">
+      <button class="pd-modal__nav-btn" id="pd-prev" aria-label="Prethodni projekat">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <polyline points="10,2 4,8 10,14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Prethodni</span>
+      </button>
+
+      <span class="pd-modal__counter" id="pd-counter"></span>
+
+      <div class="pd-modal__header-right">
+        <button class="pd-modal__nav-btn" id="pd-next" aria-label="Sledeći projekat">
+          <span>Sledeći</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <polyline points="6,2 12,8 6,14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="pd-modal__close" aria-label="Zatvori">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <line x1="1" y1="1" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="13" y1="1" x2="1" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
     <div class="pd-modal__body"></div>
   </div>
 </div>

@@ -305,13 +305,23 @@
   }
 
   // ─── PROJECT MODAL ───────────────────────────────────────
-  const modal    = document.getElementById("pd-modal");
-  const backdrop = modal?.querySelector(".pd-modal__backdrop");
-  const closeBtn = modal?.querySelector(".pd-modal__close");
+  const modal     = document.getElementById("pd-modal");
+  const backdrop  = modal?.querySelector(".pd-modal__backdrop");
+  const closeBtn  = modal?.querySelector(".pd-modal__close");
   const modalBody = modal?.querySelector(".pd-modal__body");
+  const pdPrev    = document.getElementById("pd-prev");
+  const pdNext    = document.getElementById("pd-next");
+  const pdCounter = document.getElementById("pd-counter");
 
   if (modal) {
-    function openModal(projekatId) {
+    let visibleCards = [];
+    let currentIdx   = 0;
+
+    function getVisibleCards() {
+      return Array.from(document.querySelectorAll(".projekat-card:not(.is-hidden)"));
+    }
+
+    function loadContent(projekatId) {
       const source = document.getElementById("detail-" + projekatId);
       if (!source) return;
 
@@ -321,17 +331,45 @@
       clone.removeAttribute("id");
       modalBody.appendChild(clone);
 
-      modal.removeAttribute("hidden");
-      document.body.style.overflow = "hidden";
-
-      // Reinit before/after split inside modal
       initSplits(modal);
 
-      // Wire gallery images to lightbox
       const title = document.querySelector(
         `.projekat-card[data-id="${projekatId}"] .projekat-card__naslov`
       )?.textContent?.trim() || "";
       wireLightboxImages(modal, title);
+    }
+
+    function updateNav() {
+      if (pdCounter) pdCounter.textContent = (currentIdx + 1) + " / " + visibleCards.length;
+      if (pdPrev)    pdPrev.disabled  = currentIdx === 0;
+      if (pdNext)    pdNext.disabled  = currentIdx === visibleCards.length - 1;
+    }
+
+    function openModal(projekatId) {
+      visibleCards = getVisibleCards();
+      currentIdx   = visibleCards.findIndex((c) => c.dataset.id === String(projekatId));
+      if (currentIdx === -1) currentIdx = 0;
+
+      loadContent(projekatId);
+      updateNav();
+
+      modal.removeAttribute("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function goTo(idx) {
+      if (idx < 0 || idx >= visibleCards.length) return;
+      currentIdx = idx;
+
+      modalBody.classList.add("is-transitioning");
+      // Scroll dialog to top smoothly
+      modal.querySelector(".pd-modal__dialog").scrollTop = 0;
+
+      setTimeout(() => {
+        loadContent(visibleCards[currentIdx].dataset.id);
+        updateNav();
+        modalBody.classList.remove("is-transitioning");
+      }, 180);
     }
 
     function closeModal() {
@@ -339,6 +377,9 @@
       document.body.style.overflow = "";
       modalBody.innerHTML = "";
     }
+
+    pdPrev?.addEventListener("click", () => goTo(currentIdx - 1));
+    pdNext?.addEventListener("click", () => goTo(currentIdx + 1));
 
     document.querySelectorAll(".projekat-card").forEach((card) => {
       card.addEventListener("click", () => openModal(card.dataset.id));
@@ -352,8 +393,13 @@
 
     closeBtn?.addEventListener("click", closeModal);
     backdrop?.addEventListener("click", closeModal);
+
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !modal.hasAttribute("hidden")) closeModal();
+      if (modal.hasAttribute("hidden")) return;
+      if (lb.classList.contains("is-open")) return; // lightbox handles arrows
+      if (e.key === "Escape")     closeModal();
+      if (e.key === "ArrowLeft")  goTo(currentIdx - 1);
+      if (e.key === "ArrowRight") goTo(currentIdx + 1);
     });
   }
 
