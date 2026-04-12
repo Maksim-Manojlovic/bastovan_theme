@@ -146,37 +146,65 @@
 
   // ─── LIGHTBOX ────────────────────────────────────────────
   (function () {
-    // Inject lightbox DOM once
+
+    // ── Build DOM ──
     const lb = document.createElement("div");
-    lb.id        = "lb";
+    lb.id = "lb";
     lb.className = "lb";
     lb.setAttribute("role", "dialog");
     lb.setAttribute("aria-modal", "true");
     lb.setAttribute("aria-label", "Pregled slike");
     lb.innerHTML = `
-      <button class="lb__close" aria-label="Zatvori">✕</button>
-      <button class="lb__arrow lb__arrow--prev" aria-label="Prethodna slika">&#8592;</button>
-      <div class="lb__stage">
-        <img class="lb__img" src="" alt="">
+      <button class="lb__close" aria-label="Zatvori">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <line x1="1" y1="1" x2="17" y2="17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="17" y1="1" x2="1" y2="17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <button class="lb__arrow lb__arrow--prev" aria-label="Prethodna slika">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <polyline points="13,3 6,10 13,17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="lb__main">
+        <div class="lb__stage">
+          <div class="lb__spinner"></div>
+          <img class="lb__img" src="" alt="">
+        </div>
+        <div class="lb__caption">
+          <span class="lb__title"></span>
+          <span class="lb__counter"></span>
+        </div>
+        <div class="lb__thumbs-wrap">
+          <div class="lb__thumbs"></div>
+        </div>
       </div>
-      <button class="lb__arrow lb__arrow--next" aria-label="Sledeća slika">&#8594;</button>
-      <div class="lb__counter"></div>
+      <button class="lb__arrow lb__arrow--next" aria-label="Sledeća slika">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <polyline points="7,3 14,10 7,17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     `;
     document.body.appendChild(lb);
 
     const lbImg     = lb.querySelector(".lb__img");
+    const lbSpinner = lb.querySelector(".lb__spinner");
+    const lbTitle   = lb.querySelector(".lb__title");
     const lbCounter = lb.querySelector(".lb__counter");
+    const lbThumbs  = lb.querySelector(".lb__thumbs");
     const lbPrev    = lb.querySelector(".lb__arrow--prev");
     const lbNext    = lb.querySelector(".lb__arrow--next");
     const lbClose   = lb.querySelector(".lb__close");
 
-    let images  = []; // [{src, alt}] for current project
+    let images  = [];
     let current = 0;
 
+    // ── Open / Close ──
     function open(imgs, idx) {
       images  = imgs;
       current = idx;
-      render();
+      buildThumbs();
+      render("none");
       lb.classList.add("is-open");
       document.body.style.overflow = "hidden";
       lbClose.focus();
@@ -187,54 +215,112 @@
       document.body.style.overflow = "";
     }
 
-    function render() {
+    // ── Render ──
+    function render(dir) {
       const item = images[current];
-      lbImg.classList.remove("lb__img--in");
-      // force reflow then animate
+
+      // Direction-aware slide class
+      const enterClass = dir === "next" ? "lb__img--from-right"
+                       : dir === "prev" ? "lb__img--from-left"
+                       : "lb__img--fade";
+
+      lbImg.className   = "lb__img";
+      lbSpinner.style.opacity = "1";
+
+      // Swap src
+      lbImg.src = "";
       void lbImg.offsetWidth;
       lbImg.src = item.src;
       lbImg.alt = item.alt;
-      lbImg.classList.add("lb__img--in");
+
+      lbImg.onload = () => {
+        lbSpinner.style.opacity = "0";
+        lbImg.classList.add(enterClass);
+      };
+
+      lbTitle.textContent   = item.title || "";
       lbCounter.textContent = (current + 1) + " / " + images.length;
-      lbPrev.style.visibility = images.length > 1 ? "visible" : "hidden";
-      lbNext.style.visibility = images.length > 1 ? "visible" : "hidden";
+
+      const multi = images.length > 1;
+      lbPrev.style.display = multi ? "flex" : "none";
+      lbNext.style.display = multi ? "flex" : "none";
+
+      updateThumbs();
     }
 
-    function prev() { current = (current - 1 + images.length) % images.length; render(); }
-    function next() { current = (current + 1) % images.length; render(); }
+    // ── Thumbnails ──
+    function buildThumbs() {
+      lbThumbs.innerHTML = "";
+      if (images.length < 2) {
+        lbThumbs.closest(".lb__thumbs-wrap").style.display = "none";
+        return;
+      }
+      lbThumbs.closest(".lb__thumbs-wrap").style.display = "flex";
 
-    // Bind arrows + close
+      images.forEach((img, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "lb__thumb" + (idx === current ? " is-active" : "");
+        btn.setAttribute("aria-label", "Slika " + (idx + 1));
+        const el = document.createElement("img");
+        el.src = img.src;
+        el.alt = "";
+        el.loading = "lazy";
+        btn.appendChild(el);
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const dir = idx > current ? "next" : "prev";
+          current   = idx;
+          render(dir);
+        });
+        lbThumbs.appendChild(btn);
+      });
+    }
+
+    function updateThumbs() {
+      lbThumbs.querySelectorAll(".lb__thumb").forEach((t, i) => {
+        t.classList.toggle("is-active", i === current);
+      });
+      const active = lbThumbs.querySelector(".lb__thumb.is-active");
+      if (active) active.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    }
+
+    // ── Navigate ──
+    function prev() { current = (current - 1 + images.length) % images.length; render("prev"); }
+    function next() { current = (current + 1) % images.length; render("next"); }
+
+    // ── Events ──
     lbPrev.addEventListener("click",  (e) => { e.stopPropagation(); prev(); });
     lbNext.addEventListener("click",  (e) => { e.stopPropagation(); next(); });
     lbClose.addEventListener("click", close);
     lb.addEventListener("click", (e) => { if (e.target === lb) close(); });
 
-    // Keyboard
     document.addEventListener("keydown", (e) => {
       if (!lb.classList.contains("is-open")) return;
-      if (e.key === "Escape")      close();
-      if (e.key === "ArrowLeft")   prev();
-      if (e.key === "ArrowRight")  next();
+      if (e.key === "Escape")     close();
+      if (e.key === "ArrowLeft")  prev();
+      if (e.key === "ArrowRight") next();
     });
 
-    // Touch swipe
     let touchStartX = 0;
     lb.addEventListener("touchstart", (e) => {
       touchStartX = e.touches[0].clientX;
     }, { passive: true });
     lb.addEventListener("touchend", (e) => {
       const dx = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); }
+      if (Math.abs(dx) > 50) { dx < 0 ? next() : prev(); }
     }, { passive: true });
 
-    // Wire up all projekt images
+    // ── Wire images ──
     document.querySelectorAll(".projekat").forEach((projekat) => {
       const slike = projekat.querySelectorAll(".projekat__slika img");
       if (!slike.length) return;
 
+      const title = projekat.querySelector(".projekat__naslov")?.textContent?.trim() || "";
+
       const imgs = Array.from(slike).map((img) => ({
-        src: img.src,
-        alt: img.alt || "",
+        src:   img.src,
+        alt:   img.alt || "",
+        title,
       }));
 
       slike.forEach((img, idx) => {
@@ -242,6 +328,7 @@
         img.addEventListener("click", () => open(imgs, idx));
       });
     });
+
   })();
 
   // ─── GALERIJA FILTRACIJA ─────────────────────────────────
