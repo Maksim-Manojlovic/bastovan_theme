@@ -429,6 +429,29 @@
     }
   });
 
+  subBtns.forEach((btn) => {
+    const tip    = btn.dataset.filter;
+    const usluga = btn.dataset.usluga;
+    let count = 0;
+
+    if (usluga === "*") {
+      count = countsByTip[tip] || 0;
+    } else {
+      cards.forEach((card) => {
+        const pTip    = card.dataset.tip    || "";
+        const pUsluge = (card.dataset.usluge || "").split(",").map((s) => s.trim());
+        if (pTip.split(" ").includes(tip) && pUsluge.includes(usluga)) count++;
+      });
+    }
+
+    if (count > 0) {
+      const badge = document.createElement("span");
+      badge.className   = "filter-count";
+      badge.textContent = count;
+      btn.appendChild(badge);
+    }
+  });
+
   // ── 2. Scroll entrance animations ──────────────────────
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver((entries) => {
