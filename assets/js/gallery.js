@@ -144,6 +144,106 @@
     });
   });
 
+  // ─── LIGHTBOX ────────────────────────────────────────────
+  (function () {
+    // Inject lightbox DOM once
+    const lb = document.createElement("div");
+    lb.id        = "lb";
+    lb.className = "lb";
+    lb.setAttribute("role", "dialog");
+    lb.setAttribute("aria-modal", "true");
+    lb.setAttribute("aria-label", "Pregled slike");
+    lb.innerHTML = `
+      <button class="lb__close" aria-label="Zatvori">✕</button>
+      <button class="lb__arrow lb__arrow--prev" aria-label="Prethodna slika">&#8592;</button>
+      <div class="lb__stage">
+        <img class="lb__img" src="" alt="">
+      </div>
+      <button class="lb__arrow lb__arrow--next" aria-label="Sledeća slika">&#8594;</button>
+      <div class="lb__counter"></div>
+    `;
+    document.body.appendChild(lb);
+
+    const lbImg     = lb.querySelector(".lb__img");
+    const lbCounter = lb.querySelector(".lb__counter");
+    const lbPrev    = lb.querySelector(".lb__arrow--prev");
+    const lbNext    = lb.querySelector(".lb__arrow--next");
+    const lbClose   = lb.querySelector(".lb__close");
+
+    let images  = []; // [{src, alt}] for current project
+    let current = 0;
+
+    function open(imgs, idx) {
+      images  = imgs;
+      current = idx;
+      render();
+      lb.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+      lbClose.focus();
+    }
+
+    function close() {
+      lb.classList.remove("is-open");
+      document.body.style.overflow = "";
+    }
+
+    function render() {
+      const item = images[current];
+      lbImg.classList.remove("lb__img--in");
+      // force reflow then animate
+      void lbImg.offsetWidth;
+      lbImg.src = item.src;
+      lbImg.alt = item.alt;
+      lbImg.classList.add("lb__img--in");
+      lbCounter.textContent = (current + 1) + " / " + images.length;
+      lbPrev.style.visibility = images.length > 1 ? "visible" : "hidden";
+      lbNext.style.visibility = images.length > 1 ? "visible" : "hidden";
+    }
+
+    function prev() { current = (current - 1 + images.length) % images.length; render(); }
+    function next() { current = (current + 1) % images.length; render(); }
+
+    // Bind arrows + close
+    lbPrev.addEventListener("click",  (e) => { e.stopPropagation(); prev(); });
+    lbNext.addEventListener("click",  (e) => { e.stopPropagation(); next(); });
+    lbClose.addEventListener("click", close);
+    lb.addEventListener("click", (e) => { if (e.target === lb) close(); });
+
+    // Keyboard
+    document.addEventListener("keydown", (e) => {
+      if (!lb.classList.contains("is-open")) return;
+      if (e.key === "Escape")      close();
+      if (e.key === "ArrowLeft")   prev();
+      if (e.key === "ArrowRight")  next();
+    });
+
+    // Touch swipe
+    let touchStartX = 0;
+    lb.addEventListener("touchstart", (e) => {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    lb.addEventListener("touchend", (e) => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); }
+    }, { passive: true });
+
+    // Wire up all projekt images
+    document.querySelectorAll(".projekat").forEach((projekat) => {
+      const slike = projekat.querySelectorAll(".projekat__slika img");
+      if (!slike.length) return;
+
+      const imgs = Array.from(slike).map((img) => ({
+        src: img.src,
+        alt: img.alt || "",
+      }));
+
+      slike.forEach((img, idx) => {
+        img.style.cursor = "zoom-in";
+        img.addEventListener("click", () => open(imgs, idx));
+      });
+    });
+  })();
+
   // ─── GALERIJA FILTRACIJA ─────────────────────────────────
   const filterBtns = document.querySelectorAll(".galerija-filter__btn");
   const subBtns    = document.querySelectorAll(".galerija-filter__sub");
