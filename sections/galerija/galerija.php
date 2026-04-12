@@ -231,6 +231,11 @@ $projekti_query = new WP_Query( [
       <!-- GRID -->
       <div class="projekti__grid">
         <?php foreach ( $cards as $card ) echo $card; ?>
+        <div class="galerija-empty" id="galerija-empty" hidden>
+          <div class="galerija-empty__icon">🌿</div>
+          <p class="galerija-empty__text">Nema projekata u ovoj kategoriji</p>
+          <p class="galerija-empty__sub">Probajte drugu kategoriju ili pogledajte sve projekte</p>
+        </div>
       </div>
 
       <!-- HIDDEN DETAIL TEMPLATES -->

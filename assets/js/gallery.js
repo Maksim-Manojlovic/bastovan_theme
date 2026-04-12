@@ -362,8 +362,52 @@
   const subBtns    = document.querySelectorAll(".galerija-filter__sub");
   const cards      = document.querySelectorAll(".projekat-card");
   const subRows    = document.querySelectorAll(".galerija-filter__row--usluge");
+  const emptyEl    = document.getElementById("galerija-empty");
 
+  // ── 1. Filter count badges ──────────────────────────────
+  const countsByTip = {};
+  cards.forEach((card) => {
+    (card.dataset.tip || "").split(" ").filter(Boolean).forEach((tip) => {
+      countsByTip[tip] = (countsByTip[tip] || 0) + 1;
+    });
+  });
+
+  filterBtns.forEach((btn) => {
+    const filter = btn.dataset.filter;
+    const count  = filter === "*" ? cards.length : (countsByTip[filter] || 0);
+    if (count > 0) {
+      const badge = document.createElement("span");
+      badge.className   = "filter-count";
+      badge.textContent = count;
+      btn.appendChild(badge);
+    }
+  });
+
+  // ── 2. Scroll entrance animations ──────────────────────
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.remove("card--will-animate");
+        // Reset delay after entrance so hover is instant
+        entry.target.addEventListener("transitionend", () => {
+          entry.target.style.transitionDelay = "0ms";
+        }, { once: true });
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.08, rootMargin: "0px 0px -32px 0px" });
+
+    cards.forEach((card, i) => {
+      card.classList.add("card--will-animate");
+      card.style.transitionDelay = (i % 3) * 80 + "ms";
+      observer.observe(card);
+    });
+  }
+
+  // ── 3. Filter logic with empty state ───────────────────
   function filterProjects(tip, uslugaId) {
+    let visibleCount = 0;
+
     cards.forEach((card) => {
       const pTip    = card.dataset.tip    || "";
       const pUsluge = card.dataset.usluge || "";
@@ -378,6 +422,7 @@
       }
 
       if (show) {
+        visibleCount++;
         card.classList.remove("is-hiding");
         setTimeout(() => card.classList.remove("is-hidden"), 10);
       } else {
@@ -388,6 +433,13 @@
         }, 300);
       }
     });
+
+    // Show/hide empty state after hide animation finishes
+    if (emptyEl) {
+      setTimeout(() => {
+        emptyEl.hidden = visibleCount > 0;
+      }, 320);
+    }
   }
 
   filterBtns.forEach((btn) => {

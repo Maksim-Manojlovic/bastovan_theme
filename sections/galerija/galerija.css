@@ -224,14 +224,21 @@
   transform: translateY(0);
 }
 
-/* Filter animation */
+/* Transition (shared for scroll-in + filter + hover) */
 .projekat-card {
   transition:
-    transform 0.4s ease,
-    box-shadow 0.4s ease,
-    opacity 0.3s ease;
+    opacity 0.55s ease,
+    transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.4s ease;
 }
 
+/* Scroll entrance — JS adds this before observing */
+.projekat-card.card--will-animate {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+/* Filter hide */
 .projekat-card.is-hiding {
   opacity: 0;
   transform: scale(0.97);
@@ -240,6 +247,69 @@
 
 .projekat-card.is-hidden {
   display: none;
+}
+
+/* ── FILTER COUNT BADGE ─────────────────────────────────── */
+
+.filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  margin-left: 5px;
+  background: rgba(12, 71, 52, 0.1);
+  color: var(--color-primary);
+  transition: background 0.2s, color 0.2s;
+}
+
+.galerija-filter__btn.is-active .filter-count,
+.galerija-filter__sub.is-active .filter-count {
+  background: rgba(255, 255, 255, 0.22);
+  color: var(--color-white);
+}
+
+/* ── EMPTY STATE ────────────────────────────────────────── */
+
+.galerija-empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-2xl) 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.galerija-empty[hidden] {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.galerija-empty__icon {
+  font-size: 44px;
+  opacity: 0.35;
+}
+
+.galerija-empty__text {
+  font-size: var(--text-lg);
+  color: var(--color-muted);
+  font-weight: 400;
+}
+
+.galerija-empty__sub {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  opacity: 0.7;
 }
 
 .galerija-prazna {
