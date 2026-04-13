@@ -88,6 +88,8 @@ $sekundarne = get_posts( [
           </div>
 
           <div class="usluga-row__content stack-md">
+            <span class="usluga-row__num" aria-hidden="true"><?php echo str_pad( $index + 1, 2, '0', STR_PAD_LEFT ); ?></span>
+            <div class="usluga-row__accent" aria-hidden="true"></div>
             <h3 class="heading-md"><?php echo esc_html( $usluga->post_title ); ?></h3>
 
             <?php if ( $opis ) : ?>
