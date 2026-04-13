@@ -13,6 +13,27 @@
       const expanded = btn.getAttribute("aria-expanded") === "true";
       btn.setAttribute("aria-expanded", !expanded);
       panel.hidden = expanded;
+
+      const card = btn.closest(".usluga-card");
+      if (!card) return;
+
+      const allCards = document.querySelectorAll(".usluga-card");
+
+      if (!expanded) {
+        // Opening — pin every card in this grid row to start so they don't stretch
+        const rowTop = card.offsetTop;
+        allCards.forEach((c) => {
+          if (c.offsetTop === rowTop) c.style.alignSelf = "start";
+        });
+      } else {
+        // Closing — if no accordion anywhere is still open, reset all cards
+        setTimeout(() => {
+          const anyOpen = document.querySelector(".usluga-accordion__btn[aria-expanded='true']");
+          if (!anyOpen) {
+            allCards.forEach((c) => c.style.alignSelf = "");
+          }
+        }, 0);
+      }
     });
   });
 

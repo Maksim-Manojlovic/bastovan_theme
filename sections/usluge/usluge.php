@@ -83,14 +83,11 @@ $sekundarne = get_posts( [
                 class="usluga-row__slika"
               >
             <?php else : ?>
-              <div class="usluga-row__placeholder">
-                <span class="usluga-row__emoji"><?php echo esc_html( $ikonica ); ?></span>
-              </div>
+              <div class="usluga-row__placeholder"></div>
             <?php endif; ?>
           </div>
 
           <div class="usluga-row__content stack-md">
-            <div class="usluga-row__icon"><?php echo esc_html( $ikonica ); ?></div>
             <h3 class="heading-md"><?php echo esc_html( $usluga->post_title ); ?></h3>
 
             <?php if ( $opis ) : ?>
@@ -160,7 +157,7 @@ $sekundarne = get_posts( [
 
       <?php $telefon = bastovan_get_contact( 'telefon' ); ?>
       <div class="usluge-grid">
-        <?php foreach ( $sekundarne as $usluga ) :
+        <?php foreach ( $sekundarne as $i => $usluga ) :
           $ikonica  = get_post_meta( $usluga->ID, '_bastovan_ikonica', true ) ?: '✨';
           $opis     = get_post_meta( $usluga->ID, '_bastovan_opis', true );
           $cena_od  = get_post_meta( $usluga->ID, '_bastovan_cena_od', true );
@@ -169,7 +166,7 @@ $sekundarne = get_posts( [
           $stavke   = $stavke ? json_decode( $stavke, true ) : [];
         ?>
         <div class="usluga-card">
-          <div class="usluga-card__icon"><?php echo esc_html( $ikonica ); ?></div>
+          <span class="usluga-card__num" aria-hidden="true"><?php echo str_pad( $i + 1, 2, '0', STR_PAD_LEFT ); ?></span>
           <h3 class="usluga-card__naziv"><?php echo esc_html( $usluga->post_title ); ?></h3>
 
           <?php if ( $opis ) : ?>

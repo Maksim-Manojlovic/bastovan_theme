@@ -168,30 +168,52 @@
 
 /* SEKUNDARNE — grid */
 .usluge-sekundarne {
-  background: var(--color-white);
+  background: var(--color-bg);
 }
 
 .usluge-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
+  gap: var(--space-xl);
 }
 
 .usluga-card {
-  background: var(--color-bg);
+  position: relative;
+  background:
+    linear-gradient(135deg, rgba(45, 90, 39, 0.045) 0%, transparent 50%),
+    var(--color-white);
   border-radius: var(--radius-lg);
   padding: var(--space-xl) var(--space-lg);
-  border: 1px solid rgba(30, 61, 24, 0.07);
+  border: 1px solid rgba(30, 61, 24, 0.08);
+  border-top: 3px solid var(--color-primary);
+  box-shadow: 0 2px 16px rgba(30, 61, 24, 0.06);
   transition:
     transform 0.3s,
-    box-shadow 0.3s;
+    box-shadow 0.3s,
+    border-top-color 0.3s;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .usluga-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 56px rgba(30, 61, 24, 0.13);
+  border-top-color: var(--color-primary-light);
+}
+
+.usluga-card__num {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-lg);
+  font-family: var(--font-heading);
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(30, 61, 24, 0.06);
+  user-select: none;
+  pointer-events: none;
+  letter-spacing: -3px;
 }
 
 .usluga-card__icon {
@@ -201,10 +223,11 @@
 
 .usluga-card__naziv {
   font-family: var(--font-heading);
-  font-size: var(--text-xl);
+  font-size: var(--text-2xl);
   font-weight: 700;
-  color: var(--color-text);
+  color: var(--color-primary-dark);
   margin-bottom: var(--space-sm);
+  max-width: calc(100% - 48px);
 }
 
 .usluga-card__opis {
@@ -216,6 +239,9 @@
 
 .usluga-card__meta {
   margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 /* PAKETI */
@@ -341,6 +367,18 @@
 /* Manja varijanta za kartice */
 .usluga-accordion--sm .usluga-accordion__btn {
   font-size: var(--text-xs);
+  background: rgba(45, 90, 39, 0.07);
+  border-radius: var(--radius-sm);
+  padding: 7px 12px;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: var(--space-xs);
+  transition: background 0.2s, gap 0.2s;
+}
+
+.usluga-accordion--sm .usluga-accordion__btn:hover {
+  background: rgba(45, 90, 39, 0.12);
+  gap: 8px;
 }
 
 .usluga-accordion--sm .usluga-stavke__naziv,
@@ -353,6 +391,7 @@
 .usluga-card__footer {
   margin-top: auto;
   padding-top: var(--space-md);
+  border-top: 1px solid rgba(30, 61, 24, 0.08);
   display: flex;
   align-items: center;
   justify-content: space-between;
