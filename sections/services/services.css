@@ -8,21 +8,6 @@
   overflow: clip; /* clips bg/pseudo but allows positioned children to overflow */
 }
 
-/* Overlay over background image */
-.services::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(245, 248, 244, 0.92);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Ensure content sits above the bg overlay */
-.services .container {
-  position: relative;
-  z-index: 1;
-}
 
 /* HEADER */
 .services__header {
