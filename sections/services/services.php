@@ -3,17 +3,25 @@
  * Services Section
  * Reuse: get_template_part('sections/services/services')
  */
-$_imgs        = get_option( 'bastovan_services_images', [] );
-$img_featured   = wp_get_attachment_image_url( $_imgs['services_img_featured']  ?? 0, 'full' );
-$img_kosenje_i  = wp_get_attachment_image_url( $_imgs['services_img_kosenje_i']  ?? 0, 'full' );
-$img_kosenje_d  = wp_get_attachment_image_url( $_imgs['services_img_kosenje_d']  ?? 0, 'full' );
-$img_orez_i     = wp_get_attachment_image_url( $_imgs['services_img_orez_i']     ?? 0, 'full' );
-$img_orez_d     = wp_get_attachment_image_url( $_imgs['services_img_orez_d']     ?? 0, 'full' );
-$img_korov_i    = wp_get_attachment_image_url( $_imgs['services_img_korov_i']    ?? 0, 'full' );
-$img_korov_d    = wp_get_attachment_image_url( $_imgs['services_img_korov_d']    ?? 0, 'full' );
-$img_pranje_i   = wp_get_attachment_image_url( $_imgs['services_img_pranje_i']   ?? 0, 'full' );
-$img_pranje_d   = wp_get_attachment_image_url( $_imgs['services_img_pranje_d']   ?? 0, 'full' );
+$_imgs = get_option( 'bastovan_services_images', [] );
+$_txts = get_option( 'bastovan_services_texts',  [] );
 
+// Helper — čita tekst iz opcija, fallback na hardkodovanu vrednost
+$tx = fn( string $key, string $fallback ): string => esc_html( $_txts[ $key ] ?? $fallback );
+$tx_raw = fn( string $key, string $fallback ): string => $_txts[ $key ] ?? $fallback;
+
+// Slike
+$img_featured  = wp_get_attachment_image_url( $_imgs['services_img_featured']  ?? 0, 'full' );
+$img_kosenje_i = wp_get_attachment_image_url( $_imgs['services_img_kosenje_i'] ?? 0, 'full' );
+$img_kosenje_d = wp_get_attachment_image_url( $_imgs['services_img_kosenje_d'] ?? 0, 'full' );
+$img_orez_i    = wp_get_attachment_image_url( $_imgs['services_img_orez_i']    ?? 0, 'full' );
+$img_orez_d    = wp_get_attachment_image_url( $_imgs['services_img_orez_d']    ?? 0, 'full' );
+$img_korov_i   = wp_get_attachment_image_url( $_imgs['services_img_korov_i']   ?? 0, 'full' );
+$img_korov_d   = wp_get_attachment_image_url( $_imgs['services_img_korov_d']   ?? 0, 'full' );
+$img_pranje_i  = wp_get_attachment_image_url( $_imgs['services_img_pranje_i']  ?? 0, 'full' );
+$img_pranje_d  = wp_get_attachment_image_url( $_imgs['services_img_pranje_d']  ?? 0, 'full' );
+
+// Pozadina sekcije
 $bg_type  = $_imgs['services_bg_type']  ?? 'image';
 $bg_color = $_imgs['services_bg_color'] ?? '';
 $bg_img   = wp_get_attachment_image_url( $_imgs['services_img_bg'] ?? 0, 'full' );
@@ -31,8 +39,8 @@ if ( $bg_type === 'color' && $bg_color ) {
   <div class="container">
 
     <div class="services__header stack-sm">
-      <div class="text-eyebrow">Šta nudimo</div>
-      <h2 class="heading-lg">Usluge uređivanja i<br>održavanja dvorišta</h2>
+      <div class="text-eyebrow"><?php echo $tx( 'eyebrow', 'Šta nudimo' ); ?></div>
+      <h2 class="heading-lg"><?php echo nl2br( $tx( 'heading', "Usluge uređivanja i\nodržavanja dvorišta" ) ); ?></h2>
     </div>
 
     <div class="services__grid">
@@ -53,13 +61,11 @@ if ( $bg_type === 'color' && $bg_color ) {
             </svg>
           </div>
           <div class="services__accent" aria-hidden="true"></div>
-          <h3 class="services__name">Planiranje dvorišta</h3>
-          <p class="services__desc">
-            Besplatan izlazak na teren. Detaljno planiramo sadnju,
-            košenje i ostale radove kako bismo osigurali
-            najefikasniji rast biljaka i najbolje rezultate.
-          </p>
-          <a href="#kontakt" class="services__link">Zakaži besplatnu procenu →</a>
+          <h3 class="services__name"><?php echo $tx( 'featured_title', 'Planiranje dvorišta' ); ?></h3>
+          <p class="services__desc"><?php echo nl2br( $tx( 'featured_desc', 'Besplatan izlazak na teren. Detaljno planiramo sadnju, košenje i ostale radove kako bismo osigurali najefikasniji rast biljaka i najbolje rezultate.' ) ); ?></p>
+          <a href="<?php echo esc_url( $tx_raw( 'featured_link_url', '#kontakt' ) ); ?>" class="btn btn--white">
+            <?php echo $tx( 'featured_link_text', 'Zakaži besplatnu procenu' ); ?>
+          </a>
         </div>
       </div>
 
@@ -72,12 +78,8 @@ if ( $bg_type === 'color' && $bg_color ) {
         </div>
         <?php endif; ?>
         <div class="services__accent" aria-hidden="true"></div>
-        <h3 class="services__name">Košenje trave</h3>
-        <p class="services__desc">
-          Brzo i pedantno košenje svih površina.
-          Travnjak održavamo urednim,
-          a pokošenu travu sakupljamo i odnosimo.
-        </p>
+        <h3 class="services__name"><?php echo $tx( 'kosenje_title', 'Košenje trave' ); ?></h3>
+        <p class="services__desc"><?php echo nl2br( $tx( 'kosenje_desc', 'Brzo i pedantno košenje svih površina. Travnjak održavamo urednim, a pokošenu travu sakupljamo i odnosimo.' ) ); ?></p>
         <a href="#kalkulator" class="services__link">Izračunaj cenu →</a>
         <?php if ($img_kosenje_d) : ?>
         <div class="services__card-img" aria-hidden="true">
@@ -95,11 +97,8 @@ if ( $bg_type === 'color' && $bg_color ) {
         </div>
         <?php endif; ?>
         <div class="services__accent" aria-hidden="true"></div>
-        <h3 class="services__name">Orezivanje žive ograde i drveća</h3>
-        <p class="services__desc">
-          Precizno oblikovanje za zdrav rast biljaka
-          i estetski savršeno dvorište.
-        </p>
+        <h3 class="services__name"><?php echo $tx( 'orez_title', 'Orezivanje žive ograde i drveća' ); ?></h3>
+        <p class="services__desc"><?php echo nl2br( $tx( 'orez_desc', 'Precizno oblikovanje za zdrav rast biljaka i estetski savršeno dvorište.' ) ); ?></p>
         <a href="#kalkulator" class="services__link">Izračunaj cenu →</a>
         <?php if ($img_orez_d) : ?>
         <div class="services__card-img" aria-hidden="true">
@@ -117,12 +116,8 @@ if ( $bg_type === 'color' && $bg_color ) {
         </div>
         <?php endif; ?>
         <div class="services__accent" aria-hidden="true"></div>
-        <h3 class="services__name">Uklanjanje korova</h3>
-        <p class="services__desc">
-          Temeljno čišćenje i efikasno suzbijanje
-          neželjenog rastinja iz cvećnjaka,
-          staza i travnjaka.
-        </p>
+        <h3 class="services__name"><?php echo $tx( 'korov_title', 'Uklanjanje korova' ); ?></h3>
+        <p class="services__desc"><?php echo nl2br( $tx( 'korov_desc', 'Temeljno čišćenje i efikasno suzbijanje neželjenog rastinja iz cvećnjaka, staza i travnjaka.' ) ); ?></p>
         <a href="#kalkulator" class="services__link">Izračunaj cenu →</a>
         <?php if ($img_korov_d) : ?>
         <div class="services__card-img" aria-hidden="true">
@@ -140,12 +135,8 @@ if ( $bg_type === 'color' && $bg_color ) {
         </div>
         <?php endif; ?>
         <div class="services__accent" aria-hidden="true"></div>
-        <h3 class="services__name">Pranje i čišćenje staza</h3>
-        <p class="services__desc">
-          Pranje pod visokim pritiskom —
-          uklanjamo mahovinu i prljavštinu
-          sa svih tvrdih podloga.
-        </p>
+        <h3 class="services__name"><?php echo $tx( 'pranje_title', 'Pranje i čišćenje staza' ); ?></h3>
+        <p class="services__desc"><?php echo nl2br( $tx( 'pranje_desc', 'Pranje pod visokim pritiskom — uklanjamo mahovinu i prljavštinu sa svih tvrdih podloga.' ) ); ?></p>
         <a href="#kalkulator" class="services__link">Izračunaj cenu →</a>
         <?php if ($img_pranje_d) : ?>
         <div class="services__card-img" aria-hidden="true">
@@ -159,7 +150,7 @@ if ( $bg_type === 'color' && $bg_color ) {
     <div class="services__cta">
       <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'usluge' ) ) ); ?>"
          class="btn btn--white services__cta-btn">
-        Pogledajte sve usluge →
+        <?php echo $tx( 'cta_text', 'Pogledajte sve usluge' ); ?> →
       </a>
     </div>
 
