@@ -5,7 +5,6 @@
  */
 $_imgs        = get_option( 'bastovan_services_images', [] );
 $img_featured   = wp_get_attachment_image_url( $_imgs['services_img_featured']  ?? 0, 'full' );
-$img_bg         = wp_get_attachment_image_url( $_imgs['services_img_bg']         ?? 0, 'full' );
 $img_kosenje_i  = wp_get_attachment_image_url( $_imgs['services_img_kosenje_i']  ?? 0, 'full' );
 $img_kosenje_d  = wp_get_attachment_image_url( $_imgs['services_img_kosenje_d']  ?? 0, 'full' );
 $img_orez_i     = wp_get_attachment_image_url( $_imgs['services_img_orez_i']     ?? 0, 'full' );
@@ -14,9 +13,21 @@ $img_korov_i    = wp_get_attachment_image_url( $_imgs['services_img_korov_i']   
 $img_korov_d    = wp_get_attachment_image_url( $_imgs['services_img_korov_d']    ?? 0, 'full' );
 $img_pranje_i   = wp_get_attachment_image_url( $_imgs['services_img_pranje_i']   ?? 0, 'full' );
 $img_pranje_d   = wp_get_attachment_image_url( $_imgs['services_img_pranje_d']   ?? 0, 'full' );
+
+$bg_type  = $_imgs['services_bg_type']  ?? 'image';
+$bg_color = $_imgs['services_bg_color'] ?? '';
+$bg_img   = wp_get_attachment_image_url( $_imgs['services_img_bg'] ?? 0, 'full' );
+
+if ( $bg_type === 'color' && $bg_color ) {
+    $bg_style = ' style="background-color:' . esc_attr( $bg_color ) . '"';
+} elseif ( $bg_img ) {
+    $bg_style = ' style="background-image:url(' . esc_url( $bg_img ) . ')"';
+} else {
+    $bg_style = '';
+}
 ?>
 
-<section class="services section" id="usluge"<?php if ($img_bg) echo ' style="background-image: url(' . esc_url($img_bg) . ')"'; ?>>
+<section class="services section" id="usluge"<?php echo $bg_style; ?>>
   <div class="container">
 
     <div class="services__header stack-sm">
