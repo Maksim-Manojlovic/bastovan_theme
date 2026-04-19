@@ -2,25 +2,26 @@
 
 .services {
   background: var(--color-bg);
+  background-size: cover;
+  background-position: center;
   position: relative;
-  overflow: hidden;
+  overflow: clip; /* clips bg/pseudo but allows positioned children to overflow */
 }
 
-/* Dekorativna tačkasta mreža */
+/* Overlay over background image */
 .services::before {
   content: "";
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 40%;
-  height: 100%;
-  background-image: radial-gradient(
-    circle,
-    rgba(45, 90, 39, 0.06) 1px,
-    transparent 1px
-  );
-  background-size: 28px 28px;
+  inset: 0;
+  background: rgba(245, 248, 244, 0.92);
   pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure content sits above the bg overlay */
+.services .container {
+  position: relative;
+  z-index: 1;
 }
 
 /* HEADER */
@@ -36,99 +37,254 @@
   gap: 24px;
   margin-bottom: var(--space-xl);
   position: relative;
+  /* Extra bottom row padding so illustrations can overflow downward */
+  padding-bottom: 40px;
 }
 
 /* CARD BASE */
 .services__card {
-  background: var(--color-white);
+  background: transparent;
   border-radius: var(--radius-lg);
-  padding: 36px 32px;
-  border: 1px solid rgba(30, 61, 24, 0.07);
+  padding: 36px 32px 28px;
+  border: none;
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* lets illustration bleed right beyond the card */
   transition:
     transform 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
+    box-shadow 0.3s ease;
   cursor: default;
+  display: flex;
+  flex-direction: column;
 }
 
-.services__card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-  border-color: rgba(45, 90, 39, 0.2);
-}
-
-/* Top accent line on hover */
+/* Visual card surface — rounded, clipped to its own boundary */
 .services__card::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(
-    90deg,
-    var(--color-primary),
-    var(--color-primary-light)
-  );
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(45, 90, 39, 0.045) 0%, transparent 50%),
+    var(--color-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(30, 61, 24, 0.08);
+  border-top: 3px solid var(--color-primary);
+  z-index: 0;
+  transition: box-shadow 0.3s ease;
+}
+
+/* All card children sit above the pseudo-element surface */
+.services__card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.services__card:hover {
+  transform: translateY(-5px);
 }
 
 .services__card:hover::before {
-  transform: scaleX(1);
+  box-shadow: 0 16px 48px rgba(30, 61, 24, 0.12);
 }
 
-/* FEATURED CARD */
-.services__card--featured {
-  grid-column: span 2;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  align-items: center;
-  background: var(--color-primary-dark);
-  border-color: transparent;
-  padding: 40px;
-}
-
-.services__card--featured:hover {
-  border-color: transparent;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
-}
-
-.services__card--featured::before {
-  background: linear-gradient(
-    90deg,
-    var(--color-primary-light),
-    var(--color-accent)
-  );
+/* DECORATIVE NUMBER */
+.services__num {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-lg);
+  font-family: var(--font-heading);
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -3px;
+  color: rgba(30, 61, 24, 0.06);
+  user-select: none;
+  pointer-events: none;
 }
 
 /* ICON */
 .services__icon {
-  width: 52px;
-  height: 52px;
-  background: rgba(45, 90, 39, 0.08);
+  width: 48px;
+  height: 48px;
+  background: rgba(45, 90, 39, 0.09);
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  margin-bottom: 20px;
+  color: var(--color-primary);
+  margin-bottom: var(--space-md);
+  flex-shrink: 0;
   transition:
-    transform 0.3s,
-    background 0.3s;
+    background 0.25s ease,
+    transform 0.25s ease;
 }
 
-.services__card:hover .services__icon {
-  transform: scale(1.08) rotate(-3deg);
-  background: rgba(45, 90, 39, 0.14);
+.services__card:hover .services__icon:not(.services__icon--img) {
+  background: rgba(45, 90, 39, 0.15);
+  transform: scale(1.08) rotate(-4deg);
 }
 
 .services__card--featured .services__icon {
-  background: rgba(126, 201, 107, 0.15);
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--color-white);
+}
+
+.services__card--featured:hover .services__icon {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ICON — image variant: large, flush left edge, no box */
+.services__icon--img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: 120px;
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+
+.services__icon--img img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  object-position: top left;
+  display: block;
+}
+
+/* Cards with image icons — push content below icon */
+.services__card--img-icon {
+  padding-top: 100px;
+}
+
+/* Split layout: illustration on right, text on left */
+.services__card--split {
+  padding-right: 52%;
+}
+
+/* DECORATIVE CARD ILLUSTRATION — flush bottom, overflows right only */
+.services__card-img {
+  position: absolute;
+  bottom: 0;
+  right: -28px;
+  width: 72%;
+  pointer-events: none;
+}
+
+/* Override z-index:1 set by .services__card > * */
+.services__card > .services__card-img {
+  z-index: 0;
+}
+
+.services__card-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  object-position: bottom right;
+}
+
+/* SPLIT variant — illustration on right half, anchored bottom-right */
+.services__card--split .services__card-img {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 50%;
+  width: auto;
+  overflow: hidden;
+}
+
+.services__card--split .services__card-img img {
+  position: absolute;
+  bottom: 0;
+  left: -95%;
+  height: 80%; /* ← OVDE menjaj visinu ilustracije u Orezivanje kartici */
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+}
+
+/* GREEN ACCENT BAR */
+.services__accent {
+  width: 40px;
+  height: 3px;
+  background: var(--color-primary);
+  border-radius: 2px;
+  margin-bottom: var(--space-md);
+  flex-shrink: 0;
+}
+
+/* FEATURED CARD — full background image */
+.services__card--featured {
+  grid-column: span 2;
+  display: block;
+  background: var(--color-primary-dark);
+  border: none;
+  border-top: 3px solid var(--color-primary-light);
+  padding: 0;
+  min-height: 400px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.services__card--featured::before {
+  content: none;
+}
+
+.services__card--featured:hover {
+  box-shadow: 0 20px 56px rgba(0, 0, 0, 0.25);
+}
+
+/* Background image for featured card */
+.services__featured-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.services__featured-bg img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center right;
+  transition: transform 0.7s ease;
+}
+
+.services__card--featured:hover .services__featured-bg img {
+  transform: scale(1.04);
+}
+
+/* Gradient overlay: dark left for text, transparent right shows image */
+.services__featured-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(15, 40, 12, 0.85) 0%,
+    rgba(15, 40, 12, 0.55) 45%,
+    rgba(15, 40, 12, 0.15) 100%
+  );
+  z-index: 1;
+}
+
+.services__card-content {
+  position: relative;
+  z-index: 2;
+  padding: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 400px;
+  max-width: 55%;
+}
+
+.services__card--featured .services__accent {
+  background: var(--color-primary-light);
 }
 
 /* NAME */
@@ -139,6 +295,7 @@
   color: var(--color-text);
   margin-bottom: 10px;
   line-height: 1.2;
+  max-width: 100%;
 }
 
 .services__card--featured .services__name {
@@ -149,11 +306,17 @@
 /* DESC */
 .services__desc {
   font-size: var(--text-sm);
-  color: var(--color-muted);
+  color: var(--color-primary-dark);
   line-height: 1.75;
-  font-weight: 300;
+  font-weight: 700;
+  flex: 1;
+  text-shadow: 0 1px 12px rgba(255, 255, 255, 0.9);
 }
-
+@media (max-width: 768px) {
+  .services__card-img {
+    filter: blur(0.5px);
+  }
+}
 .services__card--featured .services__desc {
   color: rgba(255, 255, 255, 0.7);
 }
@@ -163,12 +326,14 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin-top: 20px;
+  margin-top: auto;
+  padding-top: 16px;
   font-size: var(--text-sm);
   font-weight: 600;
   color: var(--color-primary);
   text-decoration: none;
   transition: gap 0.2s;
+  align-self: flex-start;
 }
 
 .services__card--featured .services__link {
@@ -177,38 +342,6 @@
 
 .services__link:hover {
   gap: 10px;
-}
-
-/* IMAGE (featured) */
-.services__img {
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  aspect-ratio: 4 / 3;
-  background: var(--color-primary);
-  position: relative;
-}
-
-.services__img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: relative;
-  z-index: 1;
-}
-
-.services__img-placeholder {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 48px;
-  opacity: 0.3;
-  background: linear-gradient(
-    135deg,
-    var(--color-primary),
-    var(--color-primary-light)
-  );
 }
 
 /* CTA */
@@ -235,6 +368,21 @@
   .services__card--featured {
     grid-column: span 2;
   }
+  .services__card-content {
+    max-width: 65%;
+  }
+  /* Kartice su šire na tabletu — smanji ilustraciju i overflow */
+  .services__card-img {
+    width: 55%;
+    right: 0;
+  }
+  /* Split kartica — smanji padding da tekst ima više prostora */
+  .services__card--split {
+    padding-right: 44%;
+  }
+  .services__card--split .services__card-img {
+    left: 56%;
+  }
 }
 
 @media (max-width: 768px) {
@@ -243,6 +391,37 @@
   }
   .services__card--featured {
     grid-column: span 1;
-    grid-template-columns: 1fr;
+    min-height: 320px;
+  }
+  .services__card-content {
+    max-width: 100%;
+    min-height: 320px;
+  }
+  .services__featured-bg::after {
+    background: rgba(15, 40, 12, 0.72);
+  }
+  /* Fiksuj overflow koji izlazi van viewport-a */
+  .services__card-img {
+    right: 0;
+    width: 60%;
+  }
+  /* Reset split kartice — tekst dobija punu širinu */
+  .services__card--split {
+    padding-right: 32px;
+  }
+  .services__card--split .services__card-img {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .services__card-img {
+    width: 50%;
+  }
+  .services__card--img-icon {
+    padding-top: 80px;
+  }
+  .services__icon--img {
+    height: 90px;
   }
 }
