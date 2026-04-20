@@ -350,11 +350,10 @@
       currentIdx   = visibleCards.findIndex((c) => c.dataset.id === String(projekatId));
       if (currentIdx === -1) currentIdx = 0;
 
-      loadContent(projekatId);
-      updateNav();
-
       modal.removeAttribute("hidden");
       document.body.style.overflow = "hidden";
+      loadContent(projekatId);
+      updateNav();
     }
 
     function goTo(idx) {
