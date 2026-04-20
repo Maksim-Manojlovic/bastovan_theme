@@ -215,12 +215,12 @@
     lbSpinner.style.opacity  = "1";
     lbImg.src                = "";
     void lbImg.offsetWidth;
-    lbImg.src = item.src;
-    lbImg.alt = item.alt;
     lbImg.onload = () => {
       lbSpinner.style.opacity = "0";
       lbImg.classList.add(enterClass);
     };
+    lbImg.src = item.src;
+    lbImg.alt = item.alt;
 
     lbTitle.textContent   = item.title || "";
     lbCounter.textContent = (lbCurrent + 1) + " / " + lbImages.length;
