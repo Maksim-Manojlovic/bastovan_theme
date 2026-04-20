@@ -5,10 +5,10 @@
  */
 
 $recenzije = [
-  [ 'tekst' => 'Đuka i ekipa su uradili fenomenalan posao sa mojim dvorištem. Stigli su na vreme, rade brzo i pedantno, a cena je potpuno fer. Preporučujem svima!', 'ime' => 'Petar P.',               'lokacija' => 'Voždovac · Košenje trave',         'zvezde' => 5 ],
-  [ 'tekst' => 'Zakažite ih odmah — nećete se pokajati. Živa ograda izgleda savršeno, a dvorište kao iz kataloga. Definitivno ćemo nastaviti saradnju.',            'ime' => 'Milica J.',              'lokacija' => 'Zemun · Orezivanje ograde',        'zvezde' => 5 ],
-  [ 'tekst' => 'Konačno neko ko dođe kada kaže i uradi šta obeća. Staze su čiste kao nikad, a korov koji je godinama bio problem — nestao za sat vremena.',         'ime' => 'Dragan M.',              'lokacija' => 'Čukarica · Čišćenje staza',        'zvezde' => 5 ],
-  [ 'tekst' => 'Planiranje bašte koje su predložili bilo je stručno i praktično. Biljke su na pravim mestima i travnjak izgleda odlično svake sezone.',              'ime' => 'Jelena S.',              'lokacija' => 'Palilula · Planiranje bašte',      'zvezde' => 5 ],
+  [ 'tekst' => 'Đuka i ekipa su uradili fenomenalan posao sa mojim dvorištem. Stigli su na vreme, rade brzo i pedantno, a cena je potpuno fer. Preporučujem svima!', 'ime' => 'Petar ',               'lokacija' => 'Voždovac · Košenje trave',         'zvezde' => 5 ],
+  [ 'tekst' => 'Zakažite ih odmah — nećete se pokajati. Živa ograda izgleda savršeno, a dvorište kao iz kataloga. Definitivno ćemo nastaviti saradnju.',            'ime' => 'Milica ',              'lokacija' => 'Zemun · Orezivanje ograde',        'zvezde' => 5 ],
+  [ 'tekst' => 'Konačno neko ko dođe kada kaže i uradi šta obeća. Staze su čiste kao nikad, a korov koji je godinama bio problem — nestao za sat vremena.',         'ime' => 'Dragan ',              'lokacija' => 'Čukarica · Čišćenje staza',        'zvezde' => 5 ],
+  [ 'tekst' => 'Planiranje bašte koje su predložili bilo je stručno i praktično. Biljke su na pravim mestima i travnjak izgleda odlično svake sezone.',              'ime' => 'Jelena ',              'lokacija' => 'Palilula · Planiranje bašte',      'zvezde' => 5 ],
   [ 'tekst' => 'Koristimo ih za održavanje zajedničkog dvorišta u zgradi već godinu dana. Uvek tačni, uvek uredni. Stanari su oduševljeni.',                         'ime' => 'Stanarska zajednica B.', 'lokacija' => 'Novi Beograd · Redovno održavanje', 'zvezde' => 5 ],
 ];
 ?>
