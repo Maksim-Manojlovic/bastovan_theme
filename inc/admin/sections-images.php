@@ -229,3 +229,4 @@ function bastovan_services_images_page(): void {
     </div>
     <?php
 }
+

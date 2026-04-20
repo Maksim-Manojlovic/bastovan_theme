@@ -3,53 +3,22 @@
  * Section: FAQ — 2 columns, v2
  * Reuse: get_template_part('sections/faq/faq')
  */
-$faq_bg_url = wp_get_attachment_image_url( 236, 'full' );
+$_faq_imgs  = get_option( 'bastovan_faq_images', [] );
+$faq_bg_url = wp_get_attachment_image_url( $_faq_imgs['faq_img_bg'] ?? 0, 'full' );
 
-$pitanja = [
-  [
-    'pitanje' => 'Koliko košta uređivanje dvorišta u Beogradu?',
-    'odgovor' => 'Cena uređivanja dvorišta u Beogradu zavisi od veličine površine, vrste radova i stanja terena. Osnovne usluge poput košenja trave su pristupačne, dok kompleksniji radovi poput planiranja dvorišta ili orezivanja drveća zahtevaju detaljniju procenu. Nudimo besplatnu procenu na terenu kako bismo vam dali tačnu cenu.',
-  ],
-  [
-    'pitanje' => 'Da li nudite besplatnu procenu dvorišta?',
-    'odgovor' => 'Da, nudimo besplatan izlazak na teren u Beogradu. Na licu mesta procenjujemo stanje dvorišta i predlažemo najbolje rešenje za uređivanje i održavanje.',
-  ],
-  [
-    'pitanje' => 'Koje usluge održavanja dvorišta nudite?',
-    'odgovor' => 'Nudimo kompletne usluge uređivanja i održavanja dvorišta u Beogradu: košenje trave, orezivanje žive ograde i drveća, uklanjanje korova, planiranje dvorišta, pranje i čišćenje staza. Sve usluge prilagođavamo vašim potrebama.',
-  ],
-  [
-    'pitanje' => 'Koliko često treba kositi travu?',
-    'odgovor' => 'Košenje trave se preporučuje jednom nedeljno u sezoni rasta (proleće i leto), dok je u jesen i zimu ređe potrebno. Redovno održavanje travnjaka doprinosi zdravijem i lepšem dvorištu.',
-  ],
-  [
-    'pitanje' => 'Da li radite održavanje dvorišta za firme i stambene zgrade?',
-    'odgovor' => 'Da, pružamo usluge održavanja dvorišta za privatne kuće, firme i stambene zajednice u Beogradu. Nudimo i redovno mesečno održavanje.',
-  ],
-  [
-    'pitanje' => 'Da li uklanjate i odnosite otpad nakon radova?',
-    'odgovor' => 'Da, nakon svih radova (košenje, orezivanje, čišćenje) uklanjamo i odnosimo sav biljni otpad kako bi vaše dvorište ostalo potpuno uredno.',
-  ],
-  [
-    'pitanje' => 'Koliko traje uređivanje dvorišta?',
-    'odgovor' => 'Trajanje radova zavisi od veličine dvorišta i vrste usluge. Manji radovi poput košenja mogu biti završeni za nekoliko sati, dok kompleksniji projekti mogu trajati više dana.',
-  ],
-  [
-    'pitanje' => 'Da li radite hitne intervencije (zaraslo dvorište)?',
-    'odgovor' => 'Da, radimo i sređivanje zapuštenih i zaraslih dvorišta u Beogradu. U takvim slučajevima pravimo plan rada i brzo vraćamo dvorište u uredno stanje.',
-  ],
-  [
-    'pitanje' => 'Da li koristite profesionalnu opremu?',
-    'odgovor' => 'Da, koristimo profesionalnu opremu za košenje, orezivanje i čišćenje kako bismo obezbedili kvalitetan i dugotrajan rezultat.',
-  ],
-  [
-    'pitanje' => 'Kako da zakažem uređivanje dvorišta?',
-    'odgovor' => 'Možete nas kontaktirati telefonom ili putem sajta. Takođe, možete koristiti naš kalkulator cena i zatražiti besplatnu procenu.',
-  ],
-];
+$_faq_txts = array_merge( bastovan_faq_defaults(), get_option( 'bastovan_faq_texts', [] ) );
+$ftx = fn( string $key ): string => esc_html( $_faq_txts[ $key ] ?? '' );
+$ftx_raw = fn( string $key ): string => $_faq_txts[ $key ] ?? '';
+
+$pitanja = [];
+for ( $i = 1; $i <= 10; $i++ ) {
+    $p = $_faq_txts[ "q{$i}_pitanje" ] ?? '';
+    $o = $_faq_txts[ "q{$i}_odgovor" ] ?? '';
+    if ( $p ) $pitanja[] = [ 'pitanje' => $p, 'odgovor' => $o ];
+}
 
 $kolona1 = array_slice( $pitanja, 0, 5 );
-$kolona2 = array_slice( $pitanja, 5, 5 );
+$kolona2 = array_slice( $pitanja, 5 );
 ?>
 
 <section class="faq section" id="faq" itemscope itemtype="https://schema.org/FAQPage"<?php if ( $faq_bg_url ) : ?> style="background-image:url(<?php echo esc_url( $faq_bg_url ); ?>)"<?php endif; ?>>
@@ -59,9 +28,9 @@ $kolona2 = array_slice( $pitanja, 5, 5 );
   <div class="container">
 
     <div class="faq__header stack-sm">
-      <div class="text-eyebrow">Česta pitanja</div>
-      <h2 class="heading-lg">Sve što vas zanima o<br>uređivanju dvorišta</h2>
-      <p class="text-lead">Odgovori na najčešća pitanja naših klijenata u Beogradu.</p>
+      <div class="text-eyebrow"><?php echo $ftx( 'eyebrow' ); ?></div>
+      <h2 class="heading-lg"><?php echo nl2br( $ftx( 'heading' ) ); ?></h2>
+      <p class="text-lead"><?php echo $ftx( 'lead' ); ?></p>
     </div>
 
     <div class="faq__grid">
@@ -101,8 +70,8 @@ $kolona2 = array_slice( $pitanja, 5, 5 );
     </div>
 
     <div class="faq__cta">
-      <p class="faq__cta-text">Niste pronašli odgovor? Kontaktirajte nas direktno.</p>
-      <a href="#kontakt" class="btn btn--primary">Pošaljite upit →</a>
+      <p class="faq__cta-text"><?php echo $ftx( 'cta_text' ); ?></p>
+      <a href="<?php echo esc_url( $ftx_raw( 'cta_url' ) ); ?>" class="btn btn--primary"><?php echo $ftx( 'cta_btn' ); ?></a>
     </div>
 
   </div>

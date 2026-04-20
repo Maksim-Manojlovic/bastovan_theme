@@ -36,6 +36,7 @@ require_once __DIR__.'/../admin/page-sections.php';
 require_once __DIR__.'/../admin/theme-options.php';
 require_once __DIR__.'/../admin/sections-images.php';
 require_once __DIR__.'/../admin/sections-texts.php';
+require_once __DIR__.'/../admin/faq-texts.php';
 
 /**
  * PERFORMANCE
