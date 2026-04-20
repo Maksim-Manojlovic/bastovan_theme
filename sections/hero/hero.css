@@ -134,6 +134,21 @@
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
+  .hero__inner {
+    padding: 100px 24px 60px;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__actions .btn {
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+  }
+
   .hero__stats {
     flex-direction: column;
     width: 100%;
