@@ -89,21 +89,21 @@ function bastovan_enqueue_assets() {
         true
     );
 
-    wp_enqueue_script(
-        'three-js',
-        'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',
-        [],
-        'r128',
-        true
-    );
-
-    wp_enqueue_script(
-        'bastovan-hero-mower',
-        BASTOVAN_THEME_URI . '/assets/js/hero-mower.js',
-        [ 'three-js' ],
-        BASTOVAN_VERSION,
-        true
-    );
+    // PRIVREMENO UGAŠENO — hero-mower i hero-leaves
+    // wp_enqueue_script(
+    //     'three-js',
+    //     'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',
+    //     [],
+    //     'r128',
+    //     true
+    // );
+    // wp_enqueue_script(
+    //     'bastovan-hero-mower',
+    //     BASTOVAN_THEME_URI . '/assets/js/hero-mower.js',
+    //     [ 'three-js' ],
+    //     BASTOVAN_VERSION,
+    //     true
+    // );
 
     wp_enqueue_script(
         'bastovan-gallery',
