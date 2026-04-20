@@ -3,6 +3,7 @@
  * Section: FAQ — 2 columns, v2
  * Reuse: get_template_part('sections/faq/faq')
  */
+$faq_bg_url = wp_get_attachment_image_url( 236, 'full' );
 
 $pitanja = [
   [
@@ -51,7 +52,10 @@ $kolona1 = array_slice( $pitanja, 0, 5 );
 $kolona2 = array_slice( $pitanja, 5, 5 );
 ?>
 
-<section class="faq section" id="faq" itemscope itemtype="https://schema.org/FAQPage">
+<section class="faq section" id="faq" itemscope itemtype="https://schema.org/FAQPage"<?php if ( $faq_bg_url ) : ?> style="background-image:url(<?php echo esc_url( $faq_bg_url ); ?>)"<?php endif; ?>>
+  <?php if ( $faq_bg_url ) : ?>
+  <div class="faq__overlay" aria-hidden="true"></div>
+  <?php endif; ?>
   <div class="container">
 
     <div class="faq__header stack-sm">
