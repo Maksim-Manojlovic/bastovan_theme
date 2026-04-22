@@ -158,4 +158,8 @@
   .reviews__card {
     width: 300px;
   }
+
+  .reviews__controls {
+    display: none;
+  }
 }
