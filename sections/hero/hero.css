@@ -134,6 +134,10 @@
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
+  .hero {
+    min-height: 100svh;
+  }
+
   .hero__inner {
     padding: 100px 24px 60px;
   }
