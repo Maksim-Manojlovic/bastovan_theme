@@ -15,7 +15,7 @@
       </div>
 
       <p class="text-lead calc__desc">
-        Unesite podatke i dobijte okvirnu cenu za samo par sekundi. Bez obaveza.
+        Unesite podatke i dobijate okvirnu cenu za samo par sekundi. Bez obaveza.
       </p>
     </div>
 
