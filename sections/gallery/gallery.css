@@ -70,7 +70,7 @@
 /* SPLIT CONTAINER */
 .gallery__split {
   position: relative;
-  height: 280px;
+  height: 360px;
   overflow: hidden;
   cursor: ew-resize;
   user-select: none;
@@ -227,6 +227,11 @@
 @media (max-width: 768px) {
   .gallery__card {
     width: 320px;
+  }
+
+  /* Box niži na mobilnom da prati užu karticu — manje crop */
+  .gallery__split {
+    height: 300px;
   }
 
   /* Na mobilnom, img širina prati karticu */
