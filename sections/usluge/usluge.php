@@ -189,7 +189,7 @@ $sekundarne = get_posts( [
           <?php if ( ! empty( $stavke ) ) : ?>
           <div class="usluga-accordion usluga-accordion--sm">
             <button class="usluga-accordion__btn" type="button" aria-expanded="false">
-              Podkategorije <span class="usluga-accordion__arrow">↓</span>
+              Potkategorije <span class="usluga-accordion__arrow">↓</span>
             </button>
             <div class="usluga-accordion__panel" hidden>
               <table class="usluga-stavke">
